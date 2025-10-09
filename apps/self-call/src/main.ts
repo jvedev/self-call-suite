@@ -1,4 +1,4 @@
-import '@shared/styles/dist/index.css';
+import '@shared/styles/src/index.css';
 import '@shared/web-components';
 
 import { Router } from '@shared/views';

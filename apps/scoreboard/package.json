@@ -1,7 +1,7 @@
 {
-  "name": "@apps/self-call",
+  "name": "@apps/scoreboard",
   "version": "1.0.0",
-  "description": "Self-call HEMA scoring application",
+  "description": "Scoreboard display application for HEMA matches",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "typescript": "^5.0.0",
-    "vite": "^5.0.0",
-    "vite-plugin-pwa": "^0.17.0"
+    "vite": "^5.0.0"
   }
 }

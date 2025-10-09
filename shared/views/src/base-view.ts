@@ -17,7 +17,7 @@ export abstract class BaseView {
     return element;
   }
 
-  protected createButton(text: string, className: string = 'btn', onClick?: () => void): HTMLButtonElement {
+  protected createButton(text: string, className: string = 'btn', onClick?: (e: Event) => void): HTMLButtonElement {
     const button = document.createElement('button');
     button.textContent = text;
     button.className = className;

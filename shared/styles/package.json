@@ -5,9 +5,10 @@
   "type": "module",
   "main": "./dist/index.css",
   "exports": {
-    ".": "./dist/index.css",
-    "./themes": "./dist/themes.css",
-    "./components": "./dist/components.css"
+    ".": "./src/index.css",
+    "./src/index.css": "./src/index.css",
+    "./themes": "./src/themes.css",
+    "./components": "./src/components.css"
   },
   "scripts": {
     "build": "postcss src/**/*.css --dir dist",

@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      Role     @default(COMPETITOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lastLogin DateTime?
+
+  // Relations
+  organizedTournaments Tournament[] @relation("OrganizedBy")
+  matchesAsRed         Match[]      @relation("RedFighter")
+  matchesAsBlue        Match[]      @relation("BlueFighter")
+
+  @@map("users")
+}
+
+model Tournament {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  startDate   DateTime
+  endDate     DateTime?
+  location    String?
+  organizer   User     @relation("OrganizedBy", fields: [organizerId], references: [id])
+  organizerId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  matches Match[]
+
+  @@map("tournaments")
+}
+
+model Match {
+  id              String      @id @default(cuid())
+  redFighter      User        @relation("RedFighter", fields: [redFighterId], references: [id])
+  redFighterId    String
+  blueFighter     User        @relation("BlueFighter", fields: [blueFighterId], references: [id])
+  blueFighterId   String
+  redScore        Int         @default(0)
+  blueScore       Int         @default(0)
+  status          MatchStatus @default(NOT_STARTED)
+  startedAt       DateTime?
+  finishedAt      DateTime?
+  tournament      Tournament? @relation(fields: [tournamentId], references: [id])
+  tournamentId    String?
+  settings        Json        // MatchSettings as JSON
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  events   MatchEvent[]
+  warnings Warning[]
+
+  @@map("matches")
+}
+
+model MatchEvent {
+  id        String    @id @default(cuid())
+  match     Match     @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  matchId   String
+  type      EventType
+  timestamp Int       // milliseconds since match start
+  fighter   Fighter?  // RED or BLUE, null for match events
+  points    Int?
+  data      Json?     // additional event data
+  createdAt DateTime  @default(now())
+
+  @@map("match_events")
+}
+
+model Warning {
+  id        String   @id @default(cuid())
+  match     Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  matchId   String
+  fighter   Fighter
+  warning   String
+  timestamp Int      // milliseconds since match start
+  createdAt DateTime @default(now())
+
+  @@map("warnings")
+}
+
+enum Role {
+  ADMIN
+  ORGANIZER
+  TABLE_CREW
+  COMPETITOR
+}
+
+enum MatchStatus {
+  NOT_STARTED
+  RUNNING
+  PAUSED
+  FINISHED
+}
+
+enum EventType {
+  MATCH_START
+  MATCH_END
+  HIT
+  WARNING
+  TIMEOUT
+  ADJUSTMENT
+}
+
+enum Fighter {
+  RED
+  BLUE
+}

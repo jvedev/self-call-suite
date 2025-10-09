@@ -18,8 +18,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@shared/modules": "workspace:*",
-    "@shared/web-components": "workspace:*"
+    "@shared/modules": "*",
+    "@shared/web-components": "*"
   },
   "devDependencies": {
     "typescript": "^5.0.0"
