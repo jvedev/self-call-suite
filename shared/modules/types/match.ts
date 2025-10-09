@@ -1,4 +1,6 @@
-import {MatchEventEntry} from './MatchEventEntry';
+import {MatchEventEntry} from './matchEventEntry';
+import {MatchSettings} from './settings';
+import {Round} from './round';
 
 // Represents the overall match
 export type Match = {

@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "composite": true,
     "target": "ES2020",
-    "lib": ["ES2020", "DOM"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -13,13 +12,15 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "outDir": "../dist/shared"
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "./views/**/*",
-    "./web-components/**/*",
-    "./modules/**/*"
+  "include": [],
+  "references": [
+    { "path": "./shared" },
+    { "path": "./apps/self-call" },
+    { "path": "./apps/scoreboard" },
+    { "path": "./apps/scoreKeeper" },
+    { "path": "./apps/admin" },
+    { "path": "./apps/server" }
   ]
 }
-
