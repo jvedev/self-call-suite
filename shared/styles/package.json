@@ -1,0 +1,23 @@
+{
+  "name": "@shared/styles",
+  "version": "1.0.0",
+  "description": "Shared CSS styles for HEMA suite apps",
+  "type": "module",
+  "main": "./dist/index.css",
+  "exports": {
+    ".": "./dist/index.css",
+    "./themes": "./dist/themes.css",
+    "./components": "./dist/components.css"
+  },
+  "scripts": {
+    "build": "postcss src/**/*.css --dir dist",
+    "dev": "postcss src/**/*.css --dir dist --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.0",
+    "postcss-cli": "^11.0.0",
+    "postcss-nested": "^6.0.0",
+    "postcss-custom-properties": "^13.0.0"
+  }
+}

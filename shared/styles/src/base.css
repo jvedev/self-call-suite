@@ -1,0 +1,86 @@
+/* Base styles and reset */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: var(--line-height-normal);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  color: var(--theme-text-primary);
+  background-color: var(--theme-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Mobile optimizations */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Remove default button and input styles */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary-blue);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --theme-border-light: var(--theme-border-heavy);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Dark mode media query support */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --theme-bg-primary: var(--color-neutral-900);
+    --theme-bg-secondary: var(--color-neutral-800);
+    --theme-bg-tertiary: var(--color-neutral-700);
+    
+    --theme-text-primary: var(--color-neutral-50);
+    --theme-text-secondary: var(--color-neutral-200);
+    --theme-text-muted: var(--color-neutral-400);
+    
+    --theme-border-light: var(--color-neutral-700);
+    --theme-border-medium: var(--color-neutral-600);
+    --theme-border-heavy: var(--color-neutral-500);
+    
+    --theme-button-bg: var(--color-neutral-700);
+    --theme-button-bg-hover: var(--color-neutral-600);
+    --theme-button-border: var(--color-neutral-500);
+  }
+}
+
+/* Portrait mode optimization for mobile */
+@media (orientation: portrait) and (max-width: 768px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

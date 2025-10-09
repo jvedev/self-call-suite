@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["./shared/*/src"],
+      "@apps/*": ["./apps/*/src"]
+    }
+  },
+  "include": [
+    "shared/**/*",
+    "apps/**/*",
+    "types/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ],
+  "references": [
+    { "path": "./shared/modules" },
+    { "path": "./shared/web-components" },
+    { "path": "./shared/views" },
+    { "path": "./shared/styles" },
+    { "path": "./apps/self-call" },
+    { "path": "./apps/scoreboard" },
+    { "path": "./apps/scoreKeeper" },
+    { "path": "./apps/admin" },
+    { "path": "./apps/server" }
+  ]
+}

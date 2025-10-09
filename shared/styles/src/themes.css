@@ -1,0 +1,65 @@
+/* Theme definitions for light and dark modes */
+
+/* Light theme (default) */
+:root {
+  --theme-bg-primary: var(--color-neutral-50);
+  --theme-bg-secondary: var(--color-neutral-100);
+  --theme-bg-tertiary: var(--color-neutral-200);
+  
+  --theme-text-primary: var(--color-neutral-900);
+  --theme-text-secondary: var(--color-neutral-700);
+  --theme-text-muted: var(--color-neutral-500);
+  
+  --theme-border-light: var(--color-neutral-200);
+  --theme-border-medium: var(--color-neutral-300);
+  --theme-border-heavy: var(--color-neutral-400);
+  
+  --theme-button-bg: var(--color-neutral-100);
+  --theme-button-bg-hover: var(--color-neutral-200);
+  --theme-button-border: var(--color-neutral-300);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --theme-bg-primary: var(--color-neutral-900);
+  --theme-bg-secondary: var(--color-neutral-800);
+  --theme-bg-tertiary: var(--color-neutral-700);
+  
+  --theme-text-primary: var(--color-neutral-50);
+  --theme-text-secondary: var(--color-neutral-200);
+  --theme-text-muted: var(--color-neutral-400);
+  
+  --theme-border-light: var(--color-neutral-700);
+  --theme-border-medium: var(--color-neutral-600);
+  --theme-border-heavy: var(--color-neutral-500);
+  
+  --theme-button-bg: var(--color-neutral-700);
+  --theme-button-bg-hover: var(--color-neutral-600);
+  --theme-button-border: var(--color-neutral-500);
+}
+
+/* High contrast mode for accessibility */
+[data-theme="high-contrast"] {
+  --theme-bg-primary: #000000;
+  --theme-bg-secondary: #1a1a1a;
+  --theme-bg-tertiary: #333333;
+  
+  --theme-text-primary: #ffffff;
+  --theme-text-secondary: #f0f0f0;
+  --theme-text-muted: #cccccc;
+  
+  --theme-border-light: #666666;
+  --theme-border-medium: #999999;
+  --theme-border-heavy: #cccccc;
+  
+  --theme-button-bg: #333333;
+  --theme-button-bg-hover: #555555;
+  --theme-button-border: #999999;
+  
+  /* Enhanced colors for better contrast */
+  --color-primary-red: #ff4d6d;
+  --color-primary-blue: #4dabf7;
+  --color-success: #51cf66;
+  --color-warning: #ffd43b;
+  --color-error: #ff6b6b;
+}
