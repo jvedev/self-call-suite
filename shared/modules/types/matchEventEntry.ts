@@ -10,7 +10,7 @@ export type MatchEventType =
 export type MatchEventEntry = {
     time: number; // seconds since match start (taking timeouts into account)
     type: MatchEventType;
-    competitor: MatchEventEntry;
+    competitor: Competitor;
     scoreValue?: number;
     warningType?: string;
     timeoutReason?: string;
