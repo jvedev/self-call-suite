@@ -41,5 +41,10 @@ the apps should have a dark and light mode that can be toggled by the user.
 - cors for cross origin resource sharing
 - dotenv for environment variable management
 
+## Documentation
 
+The following files in the `docs` directory provide detailed definitions:
 
+- [`match logic and settings`](./docs/logic_settings.md)
+- [`repo structure`](./docs/repo_structure.md)
+- [`views`](./docs/views.md)
