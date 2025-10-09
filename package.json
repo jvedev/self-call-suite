@@ -1,0 +1,9 @@
+{
+  "name": "self-call-suite",
+  "private": true,
+  "workspaces": [
+    "shared/*",
+    "apps/*"
+  ]
+}
+

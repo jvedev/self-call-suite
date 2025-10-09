@@ -41,6 +41,39 @@ the apps should have a dark and light mode that can be toggled by the user.
 - cors for cross origin resource sharing
 - dotenv for environment variable management
 
+## Monorepo Structure
+
+This repository is organized as a monorepo. The main structure is:
+
+```
+/
+├── README.md
+├── docs
+├── shared
+│   ├── views
+│   ├── web-components
+│   ├── styles
+│   └── modules
+│       ├── logging
+│       ├── state
+│       ├── settings
+│       └── auth
+└── apps
+    ├── self call
+    ├── scoreboard
+    ├── scoreKeeper
+    ├── admin
+    └── server
+```
+
+See [`docs/repo_structure.md`](./docs/repo_structure.md) for more details.
+
+## Getting Started
+
+1. Install dependencies in each app and shared package.
+2. Use your preferred package manager to run or build each app.
+3. See individual app folders for specific instructions.
+
 ## Documentation
 
 The following files in the `docs` directory provide detailed definitions:

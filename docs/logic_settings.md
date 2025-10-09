@@ -19,7 +19,7 @@
 # settings
 
 ```typescript
-export interface MatchSettings {
+type MatchSettings = {
     roundDuration: { minutes: number; seconds: number };
     suddenDeath: boolean;
     lastExchangeTime: number; // in seconds
@@ -100,7 +100,7 @@ export interface MatchSettings {
 - the Match ends when one competitor is disqualified
 - the Match ends when one competitor is unable to continue
 
-# Match event logging 
+# Match event logging
 
 ```typescript
 type Competitor = 'red' | 'blue' | 'both' | 'none';
@@ -115,7 +115,7 @@ type MatchEventType =
 type MatchEventEntry = {
     time: number; // seconds since match start (taking timeouts into account)
     type: MatchEventType;
-    competitor: Competitor;
+    competitor: MatchEventEntry;
     scoreValue?: number;
     warningType?: string;
     timeoutReason?: string;
