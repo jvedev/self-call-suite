@@ -21,5 +21,5 @@ export class HomeView extends HTMLElement {
     });
   }
 }
-debugger;
+
 customElements.define('home-view', HomeView);
