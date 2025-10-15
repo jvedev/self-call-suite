@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import path from 'path';
+import * as path from 'path';
 
 export default defineConfig({
   root: '.',
@@ -8,6 +8,7 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../../shared'),
     }
   },
+  assetsInclude: ['**/*.html', '**/*.css'],
   build: {
     outDir: 'dist',
     rollupOptions: {

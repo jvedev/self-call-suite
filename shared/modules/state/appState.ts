@@ -1,7 +1,6 @@
 import { proxy } from 'valtio';
 
 export interface AppState {
-    currentView: string;
     theme: 'light' | 'dark';
     language: string;
     isAuthenticated: boolean;
@@ -9,7 +8,6 @@ export interface AppState {
 }
 
 export const appState = proxy<AppState>({
-    currentView: 'home',
     theme: 'light',
     language: 'en',
     isAuthenticated: false,
@@ -18,7 +16,8 @@ export const appState = proxy<AppState>({
 
 export const appActions = {
     navigateTo(view: string): void {
-        appState.currentView = view;
+        // set the url without reloading the page
+        window.history.pushState({}, '', `#${view}`);
     },
 
     toggleTheme(): void {
@@ -37,6 +36,5 @@ export const appActions = {
     logout(): void {
         appState.isAuthenticated = false;
         appState.currentUser = null;
-        appState.currentView = 'login';
     }
 };

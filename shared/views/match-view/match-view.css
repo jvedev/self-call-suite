@@ -1,0 +1,16 @@
+.container { max-width: 500px; margin: 0 auto; }
+.match-header { text-align: center; margin-bottom: 2rem; }
+.competitors { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1rem; }
+.red-competitor { color: var(--color-primary-red); font-weight: bold; font-size: 1.25rem; }
+.blue-competitor { color: var(--color-primary-blue); font-weight: bold; font-size: 1.25rem; }
+.vs { font-weight: bold; color: var(--color-text-muted); }
+.timer-section { text-align: center; margin-bottom: 2rem; }
+.timer { font-size: 3rem; font-weight: bold; font-family: 'Courier New', monospace; margin-bottom: 1rem; }
+.timer-normal { color: var(--timer-normal); }
+.timer-orange { color: var(--timer-orange); }
+.timer-yellow { color: var(--timer-yellow); }
+.timer-red { color: var(--timer-red); }
+.score-display { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+.red-score, .blue-score { font-size: 1.5rem; }
+.action-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+

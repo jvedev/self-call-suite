@@ -12,7 +12,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shared/views/*": ["shared/views/*"],
+      "@shared/modules/*": ["shared/modules/*"],
+      "@shared/web-components/*": ["shared/web-components/*"],
+      "@shared/styles/*": ["shared/styles/*"]
+    }
   },
   "include": [],
   "references": [

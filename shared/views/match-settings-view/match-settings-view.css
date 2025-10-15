@@ -1,0 +1,6 @@
+.container { max-width: 500px; margin: 0 auto; }
+.form-field { margin-bottom: 1rem; }
+.form-label { display: block; margin-bottom: 0.5rem; }
+.form-input { width: 100%; padding: 0.5rem; }
+.button-group { display: flex; gap: 1rem; }
+

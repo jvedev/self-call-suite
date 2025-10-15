@@ -6,18 +6,22 @@
     <title>Self Call - HEMA Scoring</title>
     <meta name="theme-color" content="#2563eb">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="../../shared/styles/index.css">
 </head>
 <body>
-    <div id="app">
-        <header>
-            <h1>Self Call</h1>
-            <button id="theme-toggle">🌙</button>
-        </header>
-        <main id="main-content">
-            <!-- Views will be dynamically loaded here -->
-        </main>
-    </div>
-    <script type="module" src="./src/main.ts"></script>
+<app-router id="main-content">
+    <view-route path="/">
+        <home-view></home-view>
+    </view-route>
+    <view-route path="/new-match">
+        <new-match-view></new-match-view>
+    </view-route>
+    <view-route path="/match">
+        <match-view></match-view>
+    </view-route>
+    <view-route path="/settings">
+        <match-settings-view></match-settings-view>
+    </view-route>
+</app-router>
+<script type="module" src="./src/main.ts"></script>
 </body>
 </html>

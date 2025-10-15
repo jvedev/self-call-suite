@@ -1,0 +1,11 @@
+{
+  "name": "@shared/styles",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "types": "index.ts",
+  "files": [
+    "index.ts",
+    "index.css"
+  ],
+  "sideEffects": true
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Match View Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --background: #f4f6fb;
+      --foreground: #fff;
+      --text: #222;
+      --text-secondary: #888;
+      --red: #e53935;
+      --blue: #2563eb;
+      --shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    [data-theme="dark"] {
+      --primary: #60a5fa;
+      --primary-dark: #2563eb;
+      --background: #181a20;
+      --foreground: #23262f;
+      --text: #f4f6fb;
+      --text-secondary: #b0b3c6;
+      --red: #ef4444;
+      --blue: #60a5fa;
+      --shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .match-header {
+      width: 100%;
+      padding: 1.2rem 1rem 0.5rem 1rem;
+      background: var(--primary);
+      color: var(--foreground);
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border-bottom-left-radius: 1.2rem;
+      border-bottom-right-radius: 1.2rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #theme-toggle {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--foreground);
+      padding: 0.2rem;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    #theme-toggle:active {
+      background: rgba(0,0,0,0.08);
+    }
+    .timer {
+      margin: 2rem 0 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .timer-display {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: var(--foreground);
+      color: var(--text);
+      border-radius: 2rem;
+      padding: 1.2rem 2.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 0.5rem;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+    .timer.last-exchange {
+      background: #fff7e6;
+      color: #ff9800;
+    }
+    [data-theme="dark"] .timer.last-exchange {
+      background: #3b2f1a;
+      color: #ffb74d;
+    }
+    .timer.sudden-death {
+      background: #ffebee;
+      color: #e53935;
+    }
+    [data-theme="dark"] .timer.sudden-death {
+      background: #3a2323;
+      color: #ef4444;
+    }
+    .scoreboard {
+      display: flex;
+      justify-content: space-between;
+      width: 90vw;
+      max-width: 400px;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: none;
+    }
+    .fighter {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--foreground);
+      border-radius: 1.2rem;
+      margin: 0 0.5rem;
+      padding: 1rem 0.5rem;
+      box-shadow: var(--shadow);
+    }
+    .fighter.red {
+      border: 2px solid var(--red);
+    }
+    .fighter.blue {
+      border: 2px solid var(--blue);
+    }
+    .fighter-name {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+    }
+    .fighter-score {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--foreground);
+      border: none;
+      border-radius: 1.2rem;
+      box-shadow: var(--shadow);
+      padding: 0.8rem 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--primary);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .action-btn:active {
+      background: var(--primary-dark);
+      color: var(--foreground);
+    }
+    .action-btn svg {
+      margin-bottom: 0.3rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: block;
+    }
+    .game-log {
+      width: 92vw;
+      max-width: 420px;
+      background: var(--foreground);
+      color: var(--text);
+      border-radius: 1.2rem;
+      box-shadow: var(--shadow);
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .game-log-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      color: var(--primary);
+    }
+    [data-theme="dark"] .game-log-title {
+      color: var(--blue);
+    }
+    .log-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .log-item {
+      padding: 0.6rem 0.2rem;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    [data-theme="dark"] .log-item {
+      border-bottom: 1px solid #23262f;
+    }
+    .log-item:last-child {
+      border-bottom: none;
+    }
+    .log-item:hover {
+      background: var(--background);
+    }
+  </style>
+</head>
+<body>
+  <div class="match-header">
+    HEMA Match - Finals
+    <button id="theme-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path id="theme-path" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+    </button>
+  </div>
+  <div class="timer">
+    <div class="timer-display" title="Tap to adjust time">03:00</div>
+    <div style="font-size:0.95rem;color:#888;">Tap timer to adjust</div>
+  </div>
+  <div class="scoreboard">
+    <div class="fighter red">
+      <div class="fighter-name">Red Fighter</div>
+      <div class="fighter-score">5</div>
+    </div>
+    <div class="fighter blue">
+      <div class="fighter-name">Blue Fighter</div>
+      <div class="fighter-score">7</div>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <button class="action-btn" title="Register Hit">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+      Hit
+    </button>
+    <button class="action-btn" title="Register Warning">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+      Warning
+    </button>
+    <button class="action-btn" title="Timeout / Resume">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 15l5-3-5-3v6z"/></svg>
+      Timeout
+    </button>
+  </div>
+  <div class="game-log">
+    <div class="game-log-title">Game Log</div>
+    <ul class="log-list">
+      <li class="log-item"><span>03:00</span> <span>Match Started</span></li>
+      <li class="log-item"><span>02:45</span> <span>Red Hit Blue (2)</span></li>
+      <li class="log-item"><span>02:30</span> <span>Blue Warning</span></li>
+      <li class="log-item"><span>01:15</span> <span>Timeout</span></li>
+      <li class="log-item"><span>00:45</span> <span>Double Hit</span></li>
+    </ul>
+  </div>
+  <script>
+    // Theme toggle logic
+    const body = document.body;
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themePath = document.getElementById('theme-path');
+    function setTheme(theme) {
+      body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      if (theme === 'dark') {
+        themePath.setAttribute('d', 'M12 3v1M12 20v1M4.22 4.22l.7.7M18.36 18.36l.7.7M1 12h1M20 12h1M4.22 19.78l.7-.7M18.36 5.64l.7-.7M12 7a5 5 0 100 10 5 5 0 000-10z');
+      } else {
+        themePath.setAttribute('d', 'M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z');
+      }
+    }
+    function toggleTheme() {
+      const current = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      setTheme(current);
+    }
+    toggleBtn.addEventListener('click', toggleTheme);
+    // On load, set theme from localStorage or system
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(savedTheme);
+  </script>
+</body>
+</html>

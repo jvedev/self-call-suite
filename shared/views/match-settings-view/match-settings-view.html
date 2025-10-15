@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Match Settings</h2>
+  <form id="settings-form">
+    <div class="form-field">
+      <label class="form-label">Match Duration</label>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <input type="number" id="duration-minutes" class="form-input" value="3" min="0" max="30" style="width: 80px;" />
+        <span>minutes</span>
+        <input type="number" id="duration-seconds" class="form-input" value="0" min="0" max="59" style="width: 80px;" />
+        <span>seconds</span>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label"><input type="checkbox" id="sudden-death" /> Sudden Death</label>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Last Exchange Time (seconds)</label>
+      <input type="number" id="last-exchange-time" class="form-input" value="10" min="5" max="60" />
+    </div>
+    <div class="form-field">
+      <label class="form-label"><input type="checkbox" id="right-of-way" /> Right of Way</label>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Count Mode</label>
+      <div class="button-group">
+        <input type="radio" id="count-normal" name="count-mode" value="normal" class="radio-button" checked />
+        <label for="count-normal">Normal</label>
+        <input type="radio" id="count-difference" name="count-mode" value="differenceOnly" class="radio-button" />
+        <label for="count-difference">Difference Only</label>
+      </div>
+    </div>
+    <div class="form-field">
+      <label class="form-label"><input type="checkbox" id="count-doubles" /> Count Doubles</label>
+    </div>
+    <div class="form-field">
+      <label class="form-label"><input type="checkbox" id="count-after-blow" /> Count After Blow</label>
+    </div>
+    <div class="form-field">
+      <label class="form-label">Rounds per Match</label>
+      <input type="number" id="rounds-per-match" class="form-input" value="3" min="1" max="5" />
+    </div>
+    <div class="form-field">
+      <label class="form-label">Score Values (comma-separated)</label>
+      <input type="text" id="score-values" class="form-input" value="0, 2, 3" placeholder="0, 2, 3" />
+    </div>
+    <div class="button-group">
+      <button type="submit" class="btn btn-primary">Save Settings</button>
+      <button type="button" id="reset-btn" class="btn">Reset to Defaults</button>
+      <button type="button" id="back-btn" class="btn">Back</button>
+    </div>
+  </form>
+</div>
+

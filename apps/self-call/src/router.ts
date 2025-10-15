@@ -1,12 +1,11 @@
-export interface View {
-    render(): string;
-    onMount?(): void;
-    onUnmount?(): void;
-}
+import Views, {View} from "@shared/views";
+
+
+
 
 export class Router {
     private routes: Map<string, View> = new Map();
-    private currentView: View | null = null;
+    private currentView: HTMLElement | null = null;
     private mainContent: HTMLElement | null = null;
 
     constructor() {
@@ -19,22 +18,18 @@ export class Router {
         });
     }
 
-    addRoute(path: string, view: View): void {
+    addRoute(path: string, view: HTMLElement): void {
         this.routes.set(path, view);
     }
 
     navigate(path: string, pushState: boolean = true): void {
-        const view = this.routes.get(path);
+        const view:View = this.routes.get(path);
         
         if (!view) {
             console.error(`Route '${path}' not found`);
             return;
         }
 
-        // Cleanup current view
-        if (this.currentView && this.currentView.onUnmount) {
-            this.currentView.onUnmount();
-        }
 
         // Set new view
         this.currentView = view;
@@ -43,10 +38,6 @@ export class Router {
             this.mainContent.innerHTML = view.render();
         }
 
-        // Initialize new view
-        if (view.onMount) {
-            view.onMount();
-        }
 
         // Update browser history
         if (pushState) {
