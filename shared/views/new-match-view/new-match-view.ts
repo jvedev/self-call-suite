@@ -1,17 +1,17 @@
 import html from './new-match-view.html?raw';
 import css from './new-match-view.css?raw';
+import sharedCss from '../../styles/index.css?raw';
 
-export class NewMatchView extends View {
+export class NewMatchView extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
-    shadow.innerHTML = `<style>${css}</style>${html}`;
+    shadow.innerHTML = `<style>${sharedCss}</style><style>${css}</style>${html}`;
   }
 
   connectedCallback() {
     const form = this.shadowRoot?.getElementById('new-match-form') as HTMLFormElement;
     const backBtn = this.shadowRoot?.getElementById('back-btn');
-    const errorMessage = this.shadowRoot?.getElementById('error-message');
 
     form?.addEventListener('submit', (e) => {
       e.preventDefault();

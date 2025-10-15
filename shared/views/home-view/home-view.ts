@@ -1,12 +1,12 @@
 import html from './home-view.html?raw';
 import css from './home-view.css?raw';
-import View from "../index.ts";
+import sharedCss from '../../styles/index.css?raw';
 
-export class HomeView extends View {
+export class HomeView extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
-    shadow.innerHTML = `<style>${css}</style>${html}`;
+    shadow.innerHTML = `<style>${sharedCss}</style><style>${css}</style>${html}`;
   }
 
   connectedCallback() {
