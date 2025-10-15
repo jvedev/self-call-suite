@@ -1,8 +1,12 @@
 import {appState, appActions} from '@shared/modules/state';
 import {logger} from '@shared/modules/logging';
-import {addMainStyle} from "@shared/styles/index.ts"; // registreert de webcomponents
-import {HomeView, NewMatchView, MatchSettingsView, MatchView} from "@shared/views";
+import {addMainStyle} from "@shared/styles/index.ts";
+// Import web components for side effects to register custom elements
 import '@shared/web-components/src/app-router';
+import '@shared/views/home-view/home-view';
+import '@shared/views/new-match-view/new-match-view';
+import '@shared/views/match-view/match-view';
+import '@shared/views/match-settings-view/match-settings-view';
 
 class SelfCallApp {
 
