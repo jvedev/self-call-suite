@@ -3,19 +3,17 @@ button {
     color: inherit;
     cursor: pointer;
     font-size: 2rem;
-    border:1px solid;
+    /*border:1px solid;*/
     border-radius: 0.5rem;
     border-color: transparent;
 }
 
 .start {
-    display:none;
     background-color: green;
     color: white;
 }
 
 .pause{
-    display:none;
     background-color: orange;
     color: black;
 }
@@ -27,7 +25,6 @@ button {
 }
 
 .edit{
-    display:block;
     background-color: blue;
     color: white;
 }
@@ -68,35 +65,43 @@ button {
 
 }
 
-:host([mode="ending"]),
-:host([mode="running"]){
-    .pause{
-        display:block;
-    }
-    .edit{
-        display:block;
-    }
-
-}
-:host([mode="stop"]){
-    .pause{
-        display:none;
-    }
-    /*.edit{*/
-    /*    display:block;*/
-    /*}*/
-}
-:host([mode="stop"]){
-    .start{
-        display:block;
-    }
-}
-
-:host([mode="pause"]){
+:Host([state="paused"]) {
+    .edit,
     .resume{
         display:block;
     }
+
+    .pause,
+    .start{
+        display:none;
+    }
+
 }
+
+:Host([state="running"]) {
+    .edit,
+    .pause{
+        display:block;
+    }
+    .start,
+
+    .resume{
+        display:none;
+    }
+
+}
+
+:host([state="stopped"]) {
+    .edit,
+    .start{
+        display:block;
+    }
+    .pause,
+    .resume{
+        display:none;
+    }
+}
+
 
 :host([mode="edit"]) {
 
