@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer Component Test</title>
+      <style>
+          body{
+              font-family: sans-serif;
+              background-color: #0f172a;
+              color: white;
+              margin: 0;
+              padding: 0;
+          }
+          timer-component{
+              display: inline-block;
+              font-size:10rem;
+              width:30rem
+
+          }
+          @media (max-width: 600px) {
+              timer-component {
+                  width: 100vw;
+                  font-size: 6rem;
+                  box-sizing: border-box;
+              }
+          }
+      </style>
+  </head>
+  <body>
+    <h1>Timer Component Test</h1>
+    <timer-component id="timer" mode="edit"></timer-component>
+    <div style="margin-top:2em;">
+      <button id="setBtn">Set 10:30</button>
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
+

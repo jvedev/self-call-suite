@@ -1,0 +1,145 @@
+button {
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: 2rem;
+    border:1px solid;
+    border-radius: 0.5rem;
+    border-color: transparent;
+}
+
+.start {
+    display:none;
+    background-color: green;
+    color: white;
+}
+
+.pause{
+    display:none;
+    background-color: orange;
+    color: black;
+}
+
+.resume{
+    display:none;
+    background-color: orange;
+    color: black;
+}
+
+.edit{
+    display:block;
+    background-color: blue;
+    color: white;
+}
+
+:host {
+    .placeholder{
+        .update,
+        .adjuster {
+            display:none;
+        }
+
+        .controls{
+            display:grid;
+            grid-column: 1 / -1;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+        }
+        padding:.3rem;
+        background-color: inherit;
+        display:grid;
+        grid-template-columns: 1fr 3rem 1fr;
+        grid-template-rows: 1fr 3rem;
+        div {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .divider{
+            margin-top: -1rem;
+        }
+
+        .resume{
+            display:none;
+        }
+
+    }
+
+
+}
+
+:host([mode="ending"]),
+:host([mode="running"]){
+    .pause{
+        display:block;
+    }
+    .edit{
+        display:block;
+    }
+
+}
+:host([mode="stop"]){
+    .pause{
+        display:none;
+    }
+    /*.edit{*/
+    /*    display:block;*/
+    /*}*/
+}
+:host([mode="stop"]){
+    .start{
+        display:block;
+    }
+}
+
+:host([mode="pause"]){
+    .resume{
+        display:block;
+    }
+}
+
+:host([mode="edit"]) {
+
+    .placeholder{
+      grid-template-columns: 1fr auto 1fr auto;
+
+        .adjuster {
+            display:grid;
+            grid-template-rows: 1fr 1fr;
+            background-color: transparent;
+            button {
+                font-size: 3rem;
+                background-color: transparent;
+                border:none;
+                color: inherit;
+                cursor: pointer;
+
+                &.increase{
+                    padding-top:1rem;
+                }
+
+                &.decrease{
+                    padding-bottom:1rem;
+                }
+            }
+
+        }
+        .update {
+            font-family:   monospace, sans-serif;
+            background-color: green;
+            font-size: 2rem;
+            color: white;
+
+            display:block;
+            /* span all columns */
+            grid-column: 1 / -1;
+        }
+        .controls{
+
+            display:none;
+        }
+        .divider{
+            display:none;
+        }
+    }
+}

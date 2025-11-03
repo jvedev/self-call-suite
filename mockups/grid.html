@@ -1,0 +1,106 @@
+<!-- mockups/match.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Mockup</title>
+    <style>
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #f4f6fb;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Tablet and up: width is 30% of viewport height, height is 100% */
+        @media (min-width: 768px) {
+            .container {
+                width: 50vh;
+                height: 100vh;
+            }
+        }
+        .container {
+            background-color: black;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto 1fr;
+            box-sizing: border-box;
+        }
+        .cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+
+            min-width: 0;
+            min-height: 0;
+        }
+        .top-left    { background: black }
+        .top-right   { background: black; }
+
+        .mid-left    { background: red; }
+        .mid-right   { background: blue; }
+        .controls    { background: purple; grid-column: 1 / 3; height:100%}
+
+
+        /* Vierkanten: hoogte = breedte */
+        .top-left, .top-right, .mid-left, .mid-right {
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            height: auto;
+        }
+        .timer {
+            font-size: 8em;
+            font-weight: bold;
+            grid-column: 1 / 3;
+            background-color: #0f172a;
+            color:white;
+            .digit {
+                background-color: #0f172a;
+                font-size:inherit;
+                margin: 0;
+                width:45%;
+                color:white;
+                text-align: center;
+            }
+            .divider {
+                width:10%;
+                margin: .1em;
+                /*text-align: center;*/
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+        <div class="cell timer">
+            <div class="digit minutes">02</div>
+            <div class="divider">:</div>
+            <div class="digit seconds">34</div>
+        </div>
+        <div class="cell top-left">top-left</div>
+        <div class="cell top-right">top-right</div>
+        <div class="cell mid-left">mid-left</div>
+        <div class="cell mid-right">mid-right</div>
+        <div class="cell controls">controls</div>
+</div>
+</body>
+</html>
