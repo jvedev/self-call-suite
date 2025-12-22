@@ -99,7 +99,7 @@ export class WarningComponent extends BaseComponent {
 
     connectedCallback() {
         this.show();
-        this.backButton.addEventListener("click", ()=>this.dispatchCustomEvent("back"))
+        this.backButton.addEventListener("click", ()=>this.back())
         this.cancelButton.addEventListener("click", ()=>this.dispatchCustomEvent("cancel"))
         this.confirmButton.addEventListener("click", ()=>this.dispatchCustomEvent("confirm"))
         this.playerSelector.addEventListener('player-selected', () => {
