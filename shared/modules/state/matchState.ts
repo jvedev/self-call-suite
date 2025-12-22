@@ -1,5 +1,5 @@
 import { proxy } from 'valtio';
-import { Match, MatchSettings, MatchEventEntry, Round } from '../types';
+import { Match, MatchSettings, MatchEventEntry } from '../types';
 
 export interface MatchState {
     currentMatch: Match | null;

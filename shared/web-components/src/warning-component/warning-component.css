@@ -1,0 +1,47 @@
+:host {
+    display: block;
+    height: 100vh;
+
+    .placeholder {
+        height: 100%;
+        /*height: calc(100% - 2rem);*/
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: 2em 1fr 1.2em ;
+        grid-gap: 1rem;
+        padding:.5em;
+
+
+        .instructions {
+            padding-top: 1.5rem;
+            font-size: .5em;
+            text-align: center;
+
+            span{
+                font-weight: bold;
+                padding-left: 1em;
+                padding-right: 1em;
+
+            }
+        }
+
+
+        .description {
+            font-size: 1.5rem;
+        }
+
+        .controls{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 1rem;
+
+        }
+    }
+
+
+
+}
+
+
+
+

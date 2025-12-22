@@ -1,0 +1,25 @@
+:host {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    .placeholder {
+        height: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-gap: 1rem;
+        padding: 1rem;
+        grid-template-columns: 1fr 1fr;
+
+        button {
+            color: red;
+            cursor: pointer;
+            font-size: 2rem;
+            border-radius: 0.5rem;
+            border-color: transparent;
+        }
+    }
+
+}
+
+

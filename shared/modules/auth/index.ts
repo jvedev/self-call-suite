@@ -24,6 +24,7 @@ export class MockAuthService implements AuthService {
     async login(username: string, password: string): Promise<User | null> {
         // Mock implementation - in real app would validate against backend
         const user = this.users.find(u => u.username === username);
+        console.log(`Logging in user: ${username} & ${password}`);
         if (user) {
             this.currentUser = user;
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -33,6 +34,8 @@ export class MockAuthService implements AuthService {
     }
 
     async register(username: string, email: string, password: string): Promise<User | null> {
+        console.log(`Logging in user: ${username} & ${password}`);
+
         // Mock implementation
         const newUser: User = {
             id: crypto.randomUUID(),

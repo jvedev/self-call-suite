@@ -1,0 +1,31 @@
+.button {
+    color: inherit;
+    cursor: pointer;
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    border-color: transparent;
+    &:disabled {
+        cursor: default;
+        opacity: 0.6;
+    }
+}
+
+.red {
+    background-color: red;
+    color: black;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green{
+    background-color: green;
+}
+
+.text-red {
+    color: red;
+}
+.text-blue {
+    color: blue;
+}
