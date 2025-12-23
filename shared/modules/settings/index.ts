@@ -1,4 +1,4 @@
-import { MatchSettings } from '../types/settings';
+import { MatchSettings } from '../types';
 
 export const DEFAULT_MATCH_SETTINGS: MatchSettings = {
     roundDuration: { minutes: 3, seconds: 0 },
@@ -14,23 +14,23 @@ export const DEFAULT_MATCH_SETTINGS: MatchSettings = {
     roundsPerMatch: 1,
     pointCap: null,
     warnings: [
-        "Late for a fight",
-        "Turning the back",
-        "Forbidden target Feet, back, groin",
-        "Throw",
-        "Chokeholds or breaking techniques",
-        "Throwing the weapon",
-        "Hitting the floor with the weapon",
-        "Unnecessary non-scoring violence",
-        "Offensively using the crossguard",
-        "Using disproportionate force",
-        "Continuing to fight after break",
-        "Talking to the table or jury",
-        "Swearing, cursing, or shouting",
-        "dismissing a point",
-        "being a dick"
-    ],
-    scoreValues: [0, 2, 3]
+        {description: 'Bad sportsmanship', minPenalty: 1, maxPenalty: 8},
+        {description: 'Late to the ring', minPenalty: 1, maxPenalty: 3},
+        {description: 'Influencing jurors', minPenalty: 1, maxPenalty: 3},
+        {description: 'Show back off head', minPenalty: 1, maxPenalty: 3},
+        {description: 'Illegal target', minPenalty: 1, maxPenalty: 3},
+        {description: 'excessive force', minPenalty: 1, maxPenalty: 3},
+        {description: 'Striking with the pommel', minPenalty: 1, maxPenalty: 3},
+        {description: 'Striking with the crossguard', minPenalty: 1, maxPenalty: 3},
+        {description: 'Uncontrolled and dangerous throws or takedown', minPenalty: 1, maxPenalty: 3},
+        {description: 'Joint lock', minPenalty: 1, maxPenalty: 3},
+        {description: 'Kicking or punching', minPenalty: 1, maxPenalty: 3},
+        {description: 'Self-calling hits', minPenalty: 1, maxPenalty: 3},
+        {description: 'Ring-out', minPenalty: 1, maxPenalty: 3},
+        {description: 'ground strike', minPenalty: 1, maxPenalty: 3},
+        {description: 'Being a Dick', minPenalty: 1, maxPenalty: 9}]
+    ,
+    scoreValues: [0, 2, 3, 4]
 };
 
 export class SettingsManager {

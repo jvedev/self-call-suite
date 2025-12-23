@@ -1,4 +1,9 @@
+export type Warning = {
+    description: string;
+    minPenalty: number;
+    maxPenalty: number}
 
+export type WarningList = Warning[]
 
 export type MatchSettings = {
     roundDuration: { minutes: number; seconds: number };
@@ -13,6 +18,6 @@ export type MatchSettings = {
     extensionsLastRound: number;
     roundsPerMatch: number;
     pointCap: number | null;
-    warnings: string[];
+    warnings: WarningList;
     scoreValues: number[];
 }

@@ -13,7 +13,15 @@
             padding: 0;
         }
 
+        .warning-view{
+            height: 100vh;
+            width: 100vw;
+            max-width: 600px;
+
+        }
+
         .match-view{
+
             height: 100vh;
             width: 100vw;
             max-width: 600px;
@@ -34,11 +42,10 @@
                 display: block;
 
             }
+
         }
 
-        warning-component{
-            display:none
-        }
+
 
     </style>
 </head>
@@ -48,8 +55,9 @@
         <timer-component id="timer" mode="edit"></timer-component>
         <score-component id="score-component"></score-component>
     </div>
-
-<!--    <warning-component style="display:none" id="warning"></warning-component>-->
+    <div class="warning-view">
+        <warning-component id="warning"></warning-component>
+    </div>
     <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

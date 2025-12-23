@@ -29,6 +29,15 @@
 .green{
     background-color: var(--green);
 }
+.orange{
+    background-color: orange;
+    color: black;
+}
+
+.yellow{
+    background-color: yellow;
+    color: black;
+}
 
 .text-red {
     color: var(--red);

@@ -46,8 +46,6 @@ export class WarningSelector extends BaseComponent {
             warningDiv.innerHTML = warning.description
             placeHolder.appendChild(warningDiv);
             warningDiv.addEventListener('click', ()=>this.warningSelected( warning));
-
-            console.log(JSON.stringify(warning))
         })
     }
 
@@ -56,7 +54,6 @@ export class WarningSelector extends BaseComponent {
         this._warning = warning;
         this.dispatchEvent(new CustomEvent('warning-selected', { detail: { warning } }));
     }
-
 }
 
 customElements.define('warning-selector', WarningSelector);

@@ -1,0 +1,1 @@
+export type ScoreType = 'hit' | 'double' | 'after-blow' | 'no-score' | 'unclear';

@@ -105,6 +105,7 @@ export class TimerComponent extends HTMLElement {
 
     public set(minutes: number, seconds: number) {
         this.duration = minutes * 60 + seconds;
+        this.startTime = this.duration;
         this.updateDisplay();
     }
 
