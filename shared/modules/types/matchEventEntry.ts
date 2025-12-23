@@ -4,7 +4,9 @@ export type MatchEventType =
     | 'hit'
     | 'doubleHit'
     | 'warning'
-    | 'timeout'
+    | 'timeout-start'
+    | 'timeout-end'
+    | 'matchStart'
     | 'matchEnd';
 
 export type MatchEventEntry = {

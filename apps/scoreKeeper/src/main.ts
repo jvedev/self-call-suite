@@ -31,27 +31,6 @@ warning.stage = 'summery'
 //warning.stage = 'player';
 timer.set(0, 25);
 
-// Add visibility test controls
-const toggleDisplay = document.getElementById('toggleDisplay') as HTMLButtonElement;
-const toggleVisibility = document.getElementById('toggleVisibility') as HTMLButtonElement;
-const toggleOpacity = document.getElementById('toggleOpacity') as HTMLButtonElement;
-const scrollToWarning = document.getElementById('scrollToWarning') as HTMLButtonElement;
-
-toggleDisplay.addEventListener('click', () => {
-    warning.style.display = warning.style.display === 'none' ? 'block' : 'none';
-});
-
-toggleVisibility.addEventListener('click', () => {
-    warning.style.visibility = warning.style.visibility === 'hidden' ? 'visible' : 'hidden';
-});
-
-toggleOpacity.addEventListener('click', () => {
-    warning.style.opacity = warning.style.opacity === '0' ? '1' : '0';
-});
-
-scrollToWarning.addEventListener('click', () => {
-    warning.scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
 
 
 

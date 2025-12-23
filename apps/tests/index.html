@@ -11,42 +11,45 @@
             color: white;
             margin: 0;
             padding: 0;
-            display: grid;
-            grid-template-rows: auto auto auto;
         }
 
-        warning-component {
-            display: inline-block;
-            font-size: 4rem;
-            width: 30rem;
-        }
+        .match-view{
+            height: 100vh;
+            width: 100vw;
+            max-width: 600px;
+            display:grid;
+            grid-template-rows: 27vh 73vh;
 
-        timer-component {
-            display: inline-block;
-            font-size: 10rem;
-            width: 30rem
-
-        }
-
-        timer-component {
-            display: none;
-        }
-
-        @media (max-width: 600px) {
-            warning-component,
             timer-component {
-                width: 100vw;
-                font-size: 6rem;
-                box-sizing: border-box;
+                display: block;
+                font-size: 10rem;
+            }
+
+            score-component {
+                min-height: 0;
+                min-width: 0;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                display: block;
+
             }
         }
 
+        warning-component{
+            display:none
+        }
 
     </style>
 </head>
 <body>
-    <timer-component id="timer" mode="edit"></timer-component>
-    <warning-component id="warning"></warning-component>
+
+    <div class="match-view">
+        <timer-component id="timer" mode="edit"></timer-component>
+        <score-component id="score-component"></score-component>
+    </div>
+
+<!--    <warning-component style="display:none" id="warning"></warning-component>-->
     <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
