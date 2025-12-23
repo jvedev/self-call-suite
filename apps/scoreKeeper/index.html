@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Timer Component Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #0f172a;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-rows: auto auto auto;
+        }
+
+        warning-component {
+            display: inline-block;
+            font-size: 4rem;
+            width: 30rem;
+        }
+
+        timer-component {
+            display: inline-block;
+            font-size: 10rem;
+            width: 30rem
+
+        }
+
+        timer-component {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            warning-component,
+            timer-component {
+                width: 100vw;
+                font-size: 6rem;
+                box-sizing: border-box;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <timer-component id="timer" mode="edit"></timer-component>
+    <warning-component id="warning"></warning-component>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
+

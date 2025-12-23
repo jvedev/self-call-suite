@@ -11,16 +11,17 @@ type Warning = {
 
 export default class WarningSummery extends BaseComponent {
 
-    private _warning: Warning | undefined;
-    public penalty: number = 0;
-    public set warning(warning: Warning | undefined) {
-        this._warning = warning
-        this.renderDeductionButtons();
+    public set warning(warning: Warning) {
+        this.queryRoot<HTMLDivElement>(".warning").innerHTML = warning.description;
+    }
+    public set player(name: string) {
+        const playerDiv = this.queryRoot<HTMLDivElement>(".player")
+        playerDiv.innerHTML = name;
+        playerDiv.className = `player text-${name}`;
     }
 
-    get warning(): Warning {
-        if (!this._warning) throw new Error("Warning is not set");
-        return this._warning;
+    public set penalty(penalty: number) {
+        this.queryRoot<HTMLDivElement>(".penalty").innerHTML = penalty.toString();
     }
 
     get placeholder(): HTMLDivElement {
@@ -34,32 +35,6 @@ export default class WarningSummery extends BaseComponent {
         this.render(css, html);
     }
 
-
-
-
-
-
-
-
-
-    private renderDeductionButtons() {
-        const {minPenalty, maxPenalty} = this.warning;
-        this.placeholder.innerHTML = '<button class="no-penalty button green">No Penalty</button>';
-        for (let penalty = minPenalty; penalty <= maxPenalty; penalty++) {
-            const button = document.createElement('button');
-            button.textContent = penalty.toString();
-            button.className = 'red button';
-            button.addEventListener('click', () => {
-                this.penalty = penalty;
-                this.dispatchEvent(new CustomEvent('deduction-selected', {
-                    detail: {penalty},
-                    bubbles: true,
-                    composed: true
-                }));
-            });
-            this.placeholder.appendChild(button);
-        }
-    }
 }
 
 customElements.define('warning-summery', WarningSummery);

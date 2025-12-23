@@ -7,7 +7,18 @@ import {BaseComponent} from "../../base-component/base-component.ts";
 
 export class WarningSelector extends BaseComponent {
     private _warnings: WarningList = [];
-    public warning?:Warning;
+    private  _warning?:Warning;
+
+    public get warning():Warning{
+        if(!this._warning){
+            throw new Error("No warning selected")
+        }
+        return this._warning;
+    }
+
+    public set warning(value:Warning){
+        this._warning = value;
+    }
 
     set warnings(warnings: WarningList) {
         this._warnings = warnings;
@@ -42,7 +53,7 @@ export class WarningSelector extends BaseComponent {
 
     warningSelected(warning: {description: string; minPenalty: number; maxPenalty: number}) {
         console.log(`Warning selected: ${JSON.stringify(warning)}`);
-        this.warning = warning;
+        this._warning = warning;
         this.dispatchEvent(new CustomEvent('warning-selected', { detail: { warning } }));
     }
 

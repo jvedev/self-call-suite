@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "paths": {
+      "@shared/web-components": ["../../shared/web-components/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "index.html"]
+}

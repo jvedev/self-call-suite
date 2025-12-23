@@ -1,25 +1,56 @@
 import html from "./warning-component.html?raw"
 import css from "./warning-component.css?raw"
-import {WarningList} from "./warning.types.ts";
+import {Warning, WarningList} from "./warning.types.ts";
 import {BaseComponent} from "../base-component/base-component.ts";
 import WarningSelector from "./warning-selector/warning-selector.ts";
 import WarningPlayer from "./warning-player/warning-player.ts";
 import WarningDeduction from "./warning-deduction/warning-deduction.ts";
+import WarningSummery from "./warning-summery/warning-summery.ts";
 
 type WarningStage = 'player' | 'warning' | 'deduction' | 'summery';
 
 export class WarningComponent extends BaseComponent {
     private _stage: WarningStage = 'player';
-    private set stage(stage: WarningStage) {
+
+    get warning(): Warning {
+        return this.warningSelector.warning
+    }
+
+    set warning(warning: Warning) {
+        this.warningSelector.warning = warning;
+    }
+
+    get player(): string | undefined {
+        return this.playerSelector.player
+    }
+
+    set player(player: string) {
+        this.playerSelector.player = player;
+    }
+
+    set penalty(penalty: number) {
+        this.warningDeduction.penalty = penalty;
+    }
+
+    get penalty(): number {
+        return this.warningDeduction.penalty
+    }
+
+    public set stage(stage: WarningStage) {
         this._stage = stage;
         this.stageChanged();
     }
-    private get stage(): WarningStage {
+
+    public get stage(): WarningStage {
         return this._stage;
     }
 
     get warningSelector(): WarningSelector {
         return this.queryRoot<WarningSelector>("warning-selector");
+    }
+
+    get summery(): WarningSummery {
+        return this.queryRoot<WarningSummery>("warning-summery");
     }
 
     get playerSelector() {
@@ -30,15 +61,15 @@ export class WarningComponent extends BaseComponent {
         return this.queryRoot<WarningDeduction>("warning-deduction");
     }
 
-    get cancelButton():HTMLButtonElement {
+    get cancelButton(): HTMLButtonElement {
         return this.queryRoot<HTMLButtonElement>('.cancel');
     }
 
-    get backButton():HTMLButtonElement {
+    get backButton(): HTMLButtonElement {
         return this.queryRoot<HTMLButtonElement>('.back');
     }
 
-    get confirmButton():HTMLButtonElement {
+    get confirmButton(): HTMLButtonElement {
         return this.queryRoot<HTMLButtonElement>('.confirm');
     }
 
@@ -46,11 +77,12 @@ export class WarningComponent extends BaseComponent {
         this.warningSelector.warnings = warnings;
     }
 
-    set instructions(html:string){
+    set instructions(html: string) {
         this.queryRoot<HTMLDivElement>(".instructions").innerHTML = html;
     }
-    back(){
-        switch(this.stage){
+
+    back() {
+        switch (this.stage) {
             case 'player':
                 this.dispatchCustomEvent("back");
                 return;
@@ -60,23 +92,29 @@ export class WarningComponent extends BaseComponent {
             case 'deduction':
                 this.stage = 'warning';
                 return;
+            case 'summery':
+                this.stage = 'deduction';
+                return;
         }
     }
 
-    public hide(){
+    public hide() {
         this.stage = 'player'
         this.style.display = 'none';
     }
+
     public show() {
         this.style.display = 'block';
         this.stage = 'player';
         this.stageChanged();
     }
+
     public stageChanged() {
         this.warningDeduction.style.display = 'none';
         this.playerSelector.style.display = 'none';
         this.warningSelector.style.display = 'none';
         this.confirmButton.disabled = true;
+        const player = this.playerSelector.player;
 
         switch (this.stage) {
             case 'player':
@@ -85,13 +123,18 @@ export class WarningComponent extends BaseComponent {
                 return;
             case 'warning':
                 this.warningSelector.style.display = 'block';
-                const player = this.playerSelector.player;
                 this.instructions = `Warning for <span class="${player}">${player}</span>`;
                 return;
             case 'deduction':
+                this.instructions = `Deduction for <span class="${player}">${player}</span>`;
                 this.warningDeduction.style.display = 'block';
+                return;
+            case 'summery':
+                this.instructions = "Warning Summary";
+                this.summery.player = this.playerSelector.player;
+                this.summery.warning = this.warningSelector.warning;
+                this.summery.penalty = this.warningDeduction.penalty;
                 this.confirmButton.disabled = false;
-
                 return;
         }
     }
@@ -103,9 +146,9 @@ export class WarningComponent extends BaseComponent {
 
     connectedCallback() {
         this.show();
-        this.backButton.addEventListener("click", ()=>this.back())
-        this.cancelButton.addEventListener("click", ()=>this.dispatchCustomEvent("cancel"))
-        this.confirmButton.addEventListener("click", ()=>this.dispatchCustomEvent("confirm"))
+        this.backButton.addEventListener("click", () => this.back())
+        this.cancelButton.addEventListener("click", () => this.dispatchCustomEvent("cancel"))
+        this.confirmButton.addEventListener("click", this.confirm.bind(this))
         this.playerSelector.addEventListener('player-selected', () => {
             this.stage = 'warning';
         });
@@ -113,6 +156,20 @@ export class WarningComponent extends BaseComponent {
             this.warningDeduction.warning = this.warningSelector.warning
             this.stage = 'deduction';
         });
+    }
+
+    confirm(){
+
+        //dispatch a game-event with the warning details on window level
+        const detail = {
+            type:'warning',
+            player: this.player,
+            warning: this.warning,
+            penalty: this.penalty
+        };
+
+        //dispatch a custom event on window
+        window.dispatchEvent(new CustomEvent('game-event', { detail }));
     }
 }
 

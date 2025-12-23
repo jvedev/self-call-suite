@@ -1,18 +1,18 @@
 {
-  "name": "scorekeeper-app",
+  "name": "timer-test-app",
   "version": "1.0.0",
-  "description": "Table crew scorekeeper app for HEMA",
-  "main": "dist/index.js",
+  "private": true,
   "scripts": {
-    "dev": "vite --port 3002",
-    "build": "tsc && vite build",
+    "dev": "vite --host",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "valtio": "^1.11.2"
+    "@shared/web-components": "1.0.0"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
-    "vite": "^7.1.11"
+    "vite": "7.1.12"
   }
 }
+
