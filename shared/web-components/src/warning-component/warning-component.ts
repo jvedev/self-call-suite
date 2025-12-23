@@ -76,6 +76,8 @@ export class WarningComponent extends BaseComponent {
         this.warningDeduction.style.display = 'none';
         this.playerSelector.style.display = 'none';
         this.warningSelector.style.display = 'none';
+        this.confirmButton.disabled = true;
+
         switch (this.stage) {
             case 'player':
                 this.playerSelector.style.display = 'block';
@@ -84,10 +86,12 @@ export class WarningComponent extends BaseComponent {
             case 'warning':
                 this.warningSelector.style.display = 'block';
                 const player = this.playerSelector.player;
-                this.instructions = `Select a warning for <span class="${player}">${player}</span>`;
+                this.instructions = `Warning for <span class="${player}">${player}</span>`;
                 return;
             case 'deduction':
                 this.warningDeduction.style.display = 'block';
+                this.confirmButton.disabled = false;
+
                 return;
         }
     }
@@ -106,6 +110,7 @@ export class WarningComponent extends BaseComponent {
             this.stage = 'warning';
         });
         this.warningSelector.addEventListener('warning-selected', () => {
+            this.warningDeduction.warning = this.warningSelector.warning
             this.stage = 'deduction';
         });
     }

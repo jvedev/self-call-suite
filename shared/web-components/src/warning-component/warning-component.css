@@ -35,6 +35,11 @@
             grid-template-columns: 1fr 1fr 1fr;
             grid-gap: 1rem;
 
+            button.confirm:not(:disabled){
+                background-color: var(--green);
+                color: black;
+            }
+
         }
     }
 

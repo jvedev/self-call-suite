@@ -1,3 +1,10 @@
+/* variables */
+:host{
+    --green: green;
+    --red: red;
+    --blue: blue;
+}
+
 .button {
     color: inherit;
     cursor: pointer;
@@ -11,21 +18,21 @@
 }
 
 .red {
-    background-color: red;
+    background-color: var(--red);
     color: black;
 }
 
 .blue {
-    background-color: blue;
+    background-color: var(--blue);
 }
 
 .green{
-    background-color: green;
+    background-color: var(--green);
 }
 
 .text-red {
-    color: red;
+    color: var(--red);
 }
 .text-blue {
-    color: blue;
+    color: var(--blue);
 }

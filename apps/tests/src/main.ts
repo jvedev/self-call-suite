@@ -5,7 +5,7 @@ const timer = document.getElementById('timer') as TimerComponent;
 const warning = document.getElementById('warning') as WarningComponent;
 
 warning.warnings = [
-    {description: 'Bad sportsmanship', minPenalty: 1, maxPenalty: 3},
+    {description: 'Bad sportsmanship', minPenalty: 1, maxPenalty: 8},
     {description: 'Late to the ring', minPenalty: 1, maxPenalty: 3},
     {description: 'Influencing jurors', minPenalty: 1, maxPenalty: 3},
     {description: 'Show back off head', minPenalty: 1, maxPenalty: 3},
@@ -22,8 +22,8 @@ warning.warnings = [
     {description: 'Being a Dick', minPenalty: 1, maxPenalty: 9},
 ]
 
-warning.player = 'red';
-warning.stage = 'player';
+//warning.player = 'red';
+//warning.stage = 'player';
 timer.set(0, 25);
 
 // Add visibility test controls

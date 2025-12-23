@@ -1,5 +1,5 @@
-import html from "./warning-deduction.html?raw"
-import css from "./warning-deduction.css?raw"
+import html from "./warning-summery.html?raw"
+import css from "./warning-summery.css?raw"
 import {BaseComponent} from "../../base-component/base-component.ts";
 
 type Warning = {
@@ -9,7 +9,7 @@ type Warning = {
 }
 
 
-export default class WarningDeduction extends BaseComponent {
+export default class WarningSummery extends BaseComponent {
 
     private _warning: Warning | undefined;
     public penalty: number = 0;
@@ -62,4 +62,4 @@ export default class WarningDeduction extends BaseComponent {
     }
 }
 
-customElements.define('warning-deduction', WarningDeduction);
+customElements.define('warning-summery', WarningSummery);

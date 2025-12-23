@@ -8,15 +8,10 @@
         box-sizing: border-box;
         display: grid;
         grid-gap: 1rem;
-        padding: 1rem;
         grid-template-columns: 1fr 1fr;
-
-        button {
-            color: red;
-            cursor: pointer;
-            font-size: 2rem;
-            border-radius: 0.5rem;
-            border-color: transparent;
+        .no-penalty {
+            /*colspan off 2*/
+            grid-column: span 2;
         }
     }
 
