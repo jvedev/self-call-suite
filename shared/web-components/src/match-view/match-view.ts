@@ -11,6 +11,7 @@ export class MatchViewComponent extends BaseComponent {
         const el = this.queryRoot<HTMLElement>('.player.red .name');
         el.textContent = name;
     }
+
     public set playerBlue(name: string) {
         const el = this.queryRoot<HTMLElement>('.player.blue .name');
         el.textContent = name;
@@ -20,6 +21,7 @@ export class MatchViewComponent extends BaseComponent {
         const el = this.queryRoot<HTMLElement>('.player.red .score');
         el.textContent = nr.toString();
     }
+
     get scoreRed(): number {
         const el = this.queryRoot<HTMLElement>('.player.red .score');
         return parseInt(el.textContent);
@@ -29,23 +31,25 @@ export class MatchViewComponent extends BaseComponent {
         const el = this.queryRoot<HTMLElement>('.player.blue .score');
         el.textContent = nr.toString();
     }
+
     get scoreBlue(): number {
         const el = this.queryRoot<HTMLElement>('.player.blue .score');
         return parseInt(el.textContent);
     }
 
-    public get main ():HTMLDivElement {
+    public get main(): HTMLDivElement {
         return this.queryRoot<HTMLDivElement>('.main-view');
     }
+
     public get timer(): TimerComponent {
         return this.queryRoot<TimerComponent>('timer-component');
     }
 
-    public get score(): ScoreComponent{
+    public get score(): ScoreComponent {
         return this.queryRoot<ScoreComponent>('score-component');
     }
 
-    public get warning(): WarningComponent  {
+    public get warning(): WarningComponent {
         return this.queryRoot<WarningComponent>('warning-component');
     }
 
@@ -77,29 +81,58 @@ export class MatchViewComponent extends BaseComponent {
     connectedCallback() {
         this.timeoutButton.addEventListener('click', this.pause.bind(this), this.eventCleanup)
         this.hitButton.addEventListener('click', this.showScore.bind(this), this.eventCleanup)
+        this.warningButton.addEventListener('click', this.showWarning.bind(this), this.eventCleanup)
+        this.warning.addEventListener('back', this.showMain.bind(this), this.eventCleanup)
         window.addEventListener('game-event', this.gameEvent.bind(this), this.eventCleanup)
     }
 
     gameEvent(event: Event) {
         const {detail} = event as CustomEvent;
-        debugger;
-        if(detail.type=='score') {
+        if (detail.type == 'score') {
             this.scoreRed += detail.scoreRed;
             this.scoreBlue += detail.scoreBlue;
         }
-        this.main.style.display = '';
-        this.score.style.display = 'none';
+
+        if (detail.type == 'warning') {
+            const {player, penalty} = detail;
+            if(penalty) {
+                if(player == 'blue') {
+                    this.scoreBlue -= penalty;
+                }
+                if(player == 'red') {
+                    this.scoreRed -= penalty;
+                }
+            }
+        }
+      this.showMain()
+
         console.log('Game event', detail);
     }
 
-
-    showScore(){
+    hideAll() {
         this.main.style.display = 'none';
+        this.warning.style.display = 'none';
+        this.score.style.display = 'none';
+    }
+    showMain() {
+        this.hideAll()
+        this.main.style.display = '';
+    }
+
+    showWarning() {
+        this.hideAll()
+        this.warning.style.display = 'block';
+
+    }
+
+    showScore() {
+        this.hideAll()
         this.score.style.display = 'block';
     }
-    pause(){
+
+    pause() {
         //check if the timer is allready paused
-        if(this.timer.mode=='pause'){
+        if (this.timer.mode == 'pause') {
             this.timer.resume()
             this.timeoutButton.innerText = 'Timeout'
             return;
@@ -108,7 +141,6 @@ export class MatchViewComponent extends BaseComponent {
         this.timeoutButton.innerText = 'Resume'
 
     }
-
 
 
 }

@@ -75,6 +75,7 @@
     /*}*/
 
     score-component {
+        height:100vh;
         display: none;
     }
 

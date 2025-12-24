@@ -154,6 +154,10 @@ export class WarningComponent extends BaseComponent {
             this.stage = 'deduction';
         });
         this.warningDeduction.addEventListener('deduction-selected', () => {
+            if(this.penalty === 0){
+                this.confirm();
+                return
+            }
             this.stage = 'summery';
         });
     }
@@ -170,6 +174,8 @@ export class WarningComponent extends BaseComponent {
 
         //dispatch a custom event on window
         window.dispatchEvent(new CustomEvent('game-event', { detail }));
+        //reset to initial state
+        this.stage = 'player';
     }
 }
 

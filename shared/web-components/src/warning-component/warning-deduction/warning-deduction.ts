@@ -13,6 +13,7 @@ export default class WarningDeduction extends BaseComponent {
 
     private _warning: Warning | undefined;
     public penalty: number = 0;
+
     public set warning(warning: Warning | undefined) {
         this._warning = warning
         this.renderDeductionButtons();
@@ -24,9 +25,8 @@ export default class WarningDeduction extends BaseComponent {
     }
 
     get placeholder(): HTMLDivElement {
-        return this.queryRoot<HTMLDivElement>('.placeholder') ;
+        return this.queryRoot<HTMLDivElement>('.placeholder');
     }
-
 
 
     constructor() {
@@ -35,28 +35,30 @@ export default class WarningDeduction extends BaseComponent {
     }
 
 
-
-
-
-
-
-
+    private onSelect(penalty: number) {
+        this.penalty = penalty;
+        this.dispatchEvent(new CustomEvent('deduction-selected', {
+            detail: {penalty},
+            bubbles: true,
+            composed: true
+        }));
+    }
 
     private renderDeductionButtons() {
+        this.placeholder.innerHTML = '';
         const {minPenalty, maxPenalty} = this.warning;
-        this.placeholder.innerHTML = '<button class="no-penalty button green">No Penalty</button>';
+
+        const noPenaltyButton = document.createElement("button");
+        noPenaltyButton.addEventListener('click', () => this.onSelect(0))
+        noPenaltyButton.className = "no-penalty button green"
+        noPenaltyButton.innerText = "No penalty"
+        this.placeholder.appendChild(noPenaltyButton);
+
         for (let penalty = minPenalty; penalty <= maxPenalty; penalty++) {
             const button = document.createElement('button');
             button.textContent = penalty.toString();
             button.className = 'red button';
-            button.addEventListener('click', () => {
-                this.penalty = penalty;
-                this.dispatchEvent(new CustomEvent('deduction-selected', {
-                    detail: {penalty},
-                    bubbles: true,
-                    composed: true
-                }));
-            });
+            button.addEventListener('click', () => this.onSelect(penalty));
             this.placeholder.appendChild(button);
         }
     }
