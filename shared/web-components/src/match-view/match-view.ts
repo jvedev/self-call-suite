@@ -83,6 +83,7 @@ export class MatchViewComponent extends BaseComponent {
         this.hitButton.addEventListener('click', this.showScore.bind(this), this.eventCleanup)
         this.warningButton.addEventListener('click', this.showWarning.bind(this), this.eventCleanup)
         this.warning.addEventListener('back', this.showMain.bind(this), this.eventCleanup)
+        this.score.addEventListener('back', this.showMain.bind(this), this.eventCleanup)
         window.addEventListener('game-event', this.gameEvent.bind(this), this.eventCleanup)
     }
 

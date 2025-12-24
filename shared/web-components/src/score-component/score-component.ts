@@ -9,24 +9,21 @@ export class ScoreComponent extends BaseComponent {
     private _scoreOptions: number[] = [];
     private scoreRed: number = 0;
     private scoreBlue: number = 0;
-    // private get scoreRed():number{
-    //     const selectedButton = this.scoreButtonPlaceholder.querySelector('.button.red.selected') as HTMLButtonElement;
-    //     return selectedButton ? parseInt(selectedButton.innerHTML) : 0;
-    // }
-    // private get scoreBlue():number{
-    //     const selectedButton = this.scoreButtonPlaceholder.querySelector('.button.blue.selected') as HTMLButtonElement;
-    //     return selectedButton ? parseInt(selectedButton.innerHTML) : 0;
-    // }
+
     public get scoreButtonPlaceholder(): HTMLDivElement {
         return this.queryRoot<HTMLDivElement>('.score-buttons')!;
     }
 
+    public get backButton(){
+        return this.queryRoot<HTMLButtonElement>('.back');
+    }
+
     public get hitButton(): HTMLButtonElement {
-        return this.queryRoot<HTMLButtonElement>('.hit')!;
+        return this.queryRoot<HTMLButtonElement>('.hit');
     }
 
     public get afterBlowButton(): HTMLButtonElement {
-        return this.queryRoot<HTMLButtonElement>('.after-blow')!;
+        return this.queryRoot<HTMLButtonElement>('.after-blow');
     }
 
 
@@ -133,7 +130,6 @@ export class ScoreComponent extends BaseComponent {
 
         if (hit) {
             this.hitButton.disabled = false;
-            ;
         }
 
 
@@ -145,6 +141,7 @@ export class ScoreComponent extends BaseComponent {
         this.afterBlowButton.addEventListener('click', () => this.score('after-blow'), this.eventCleanup)
         this.noScoreButton.addEventListener('click', () => this.score('no-score'), this.eventCleanup)
         this.unclearButton.addEventListener('click', () => this.score('unclear'), this.eventCleanup)
+        this.backButton.addEventListener('click' ,()=>this.dispatchCustomEvent("back"), this.eventCleanup)
     }
 
     score(type: ScoreType) {
