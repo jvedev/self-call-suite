@@ -2,7 +2,8 @@ import html from "./score-component.html?raw"
 import css from "./score-component.css?raw"
 import {BaseComponent} from "../base-component/base-component.ts";
 import {ScoreType} from "./score.types.ts";
-export type Player =  'red' | 'blue'
+
+export type Player = 'red' | 'blue'
 
 export class ScoreComponent extends BaseComponent {
     private _scoreOptions: number[] = [];
@@ -56,7 +57,7 @@ export class ScoreComponent extends BaseComponent {
     }
 
     renderScoreButtons() {
-        this.scoreOptions.forEach((point:number) => {
+        this.scoreOptions.forEach((point: number) => {
             this.renderButton(point, 'red');
             this.renderButton(point, 'blue');
         })
@@ -87,74 +88,79 @@ export class ScoreComponent extends BaseComponent {
         //if so set the
 
         this.deselectAllButtons()
-        if(player === 'red'){
-            this.scoreRed = (this.scoreRed === point)?0: point;
+        if (player === 'red') {
+            this.scoreRed = (this.scoreRed === point) ? 0 : point;
 
 
         }
-        if(player === 'blue'){
-            this.scoreBlue = (this.scoreBlue === point)?0: point;
+        if (player === 'blue') {
+            this.scoreBlue = (this.scoreBlue === point) ? 0 : point;
 
         }
 
-        const redButton = this.queryRoot<HTMLButtonElement>(`.blue[data-points='${this.scoreBlue}']`)
-        const blueButton = this.queryRoot<HTMLButtonElement>(`.red[data-points='${this.scoreRed}']`)
-        if(redButton){
-            redButton.classList.add('selected');
+        if (this.scoreBlue) {
+            const redButton = this.queryRoot<HTMLButtonElement>(`.blue[data-points='${this.scoreBlue}']`)
+            if (redButton) {
+                redButton.classList.add('selected');
+            }
         }
-        if(blueButton){
-            blueButton.classList.add('selected');
+        if (this.scoreRed) {
+            const blueButton = this.queryRoot<HTMLButtonElement>(`.red[data-points='${this.scoreRed}']`)
+
+            if (blueButton) {
+                blueButton.classList.add('selected');
+            }
         }
         this.setButtons()
     }
 
-    setButtons(){
+    setButtons() {
         const {scoreRed, scoreBlue} = this;
         const double = (scoreRed > 0 && scoreBlue > 0)
         const hit = !double && (scoreRed > 0 || scoreBlue > 0)
         // set all buttons to disabled
         this.doubleButton.disabled = true;
-        this.afterBlowButton.disabled  = true;
-        this.hitButton.disabled  = true;
-
+        this.afterBlowButton.disabled = true;
+        this.hitButton.disabled = true;
 
 
         // Enable/disable buttons based on scores
-        if(double){
+        if (double) {
             this.doubleButton.disabled = false;
-            this.afterBlowButton.disabled  = false;
+            this.afterBlowButton.disabled = false;
             return;
         }
 
-        if(hit){
-            this.hitButton.disabled  = false;;
+        if (hit) {
+            this.hitButton.disabled = false;
+            ;
         }
 
 
     }
 
     connectedCallback() {
-        this.hitButton.addEventListener('click', ()=>this.score('hit'), this.eventCleanup)
-        this.doubleButton.addEventListener('click', ()=>this.score('double'), this.eventCleanup)
-        this.afterBlowButton.addEventListener('click', ()=>this.score('after-blow'), this.eventCleanup)
-        this.noScoreButton.addEventListener('click', ()=>this.score('no-score'), this.eventCleanup)
-        this.unclearButton.addEventListener('click', ()=>this.score('unclear'), this.eventCleanup)
+        this.hitButton.addEventListener('click', () => this.score('hit'), this.eventCleanup)
+        this.doubleButton.addEventListener('click', () => this.score('double'), this.eventCleanup)
+        this.afterBlowButton.addEventListener('click', () => this.score('after-blow'), this.eventCleanup)
+        this.noScoreButton.addEventListener('click', () => this.score('no-score'), this.eventCleanup)
+        this.unclearButton.addEventListener('click', () => this.score('unclear'), this.eventCleanup)
     }
 
-    score(type:ScoreType){
+    score(type: ScoreType) {
         //dispatch a game-event with the warning details on window level
-        if(['no-score','unclear'].includes(type) ){
+        if (['no-score', 'unclear'].includes(type)) {
             this.scoreRed = 0;
             this.scoreBlue = 0;
         }
         const detail = {
-            type:'score',
+            type: 'score',
             scoreType: type,
             scoreRed: this.scoreRed,
             scoreBlue: this.scoreBlue,
         };
-            //dispatch a custom event on window
-        window.dispatchEvent(new CustomEvent('game-event', { detail }));
+        //dispatch a custom event on window
+        window.dispatchEvent(new CustomEvent('game-event', {detail}));
         this.scoreRed = 0;
         this.scoreBlue = 0;
         this.deselectAllButtons();

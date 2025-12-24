@@ -14,3 +14,5 @@ yarn-error.log*
 .vscode/
 coverage/
 /package-lock.json
+/apps/certs/cert.pem
+/apps/certs/key.pem

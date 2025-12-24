@@ -46,9 +46,6 @@ export class BaseComponent extends HTMLElement {
         const element = this.root.querySelector(query);
 
         if (!element) {
-            if (undefined as unknown as ElementType === undefined) {
-                return undefined as ElementType; // Return undefined if it's expected
-            }
             throw new Error(`Element not found for query ${query}`);
         }
 
