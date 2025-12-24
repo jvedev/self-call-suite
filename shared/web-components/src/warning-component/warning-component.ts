@@ -103,12 +103,6 @@ export class WarningComponent extends BaseComponent {
         this.style.display = 'none';
     }
 
-    public show() {
-        this.style.display = 'block';
-        this.stage = 'player';
-        this.stageChanged();
-    }
-
     public stageChanged() {
         this.warningDeduction.style.display = 'none';
         this.playerSelector.style.display = 'none';
@@ -147,7 +141,8 @@ export class WarningComponent extends BaseComponent {
     }
 
     connectedCallback() {
-        this.show();
+        this.stage = 'player';
+        this.stageChanged();
         this.backButton.addEventListener("click", () => this.back())
         this.cancelButton.addEventListener("click", () => this.dispatchCustomEvent("cancel"))
         this.confirmButton.addEventListener("click", this.confirm.bind(this))

@@ -1,0 +1,43 @@
+:host {
+    display: block;
+    box-sizing: border-box;
+    inline-size: 100%;
+    height: 100%;
+    width: 100%;
+
+    .placeholder {
+        height: 100%;
+        width: 100%;
+        min-height: 0;
+        min-width: 0;
+
+        .main-view{
+            display: grid;
+            grid-template-rows: 30vh 70vh;
+        }
+
+        timer-component {
+            display: block;
+            min-height: 0;
+            min-width: 0;
+        }
+
+        score-component {
+            min-height: 0;
+            min-width: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: block;
+        }
+
+        score-component{
+            display:none;
+        }
+        warning-component {
+            display: none;
+        }
+
+    }
+}
+

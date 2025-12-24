@@ -1,9 +1,10 @@
 import '@shared/web-components';
-import {ScoreComponent, TimerComponent, WarningComponent} from "@shared/web-components";
+import {MatchViewComponent} from "@shared/web-components";
 
-const timer = document.getElementById('timer') as TimerComponent;
-const warning = document.getElementById('warning') as WarningComponent;
-const score = document.getElementById('score-component') as ScoreComponent;
+const matchView = document.getElementById('match-view') as MatchViewComponent;
+const timer = matchView.timer!;
+const warning = matchView.warning!;
+const score = matchView.score!;
 warning.warnings = [
     {description: 'Bad sportsmanship', minPenalty: 1, maxPenalty: 8},
     {description: 'Late to the ring', minPenalty: 1, maxPenalty: 3},

@@ -1,0 +1,20 @@
+:host {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    .placeholder {
+        height: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 5em 1fr;
+        grid-template-rows: 1.5em 1.5em 1fr 2em;
+        .row {
+            /*colspan off 2*/
+            grid-column: span 2;
+        }
+    }
+
+}
+
+

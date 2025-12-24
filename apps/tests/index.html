@@ -20,31 +20,7 @@
             display: block;
         }
 
-        .match-view{
 
-            height: 100vh;
-            width: 100vw;
-            max-width: 600px;
-            display:grid;
-            grid-template-rows: 30vh 70vh;
-
-            /*timer-component {*/
-            /*    display: block;*/
-            /*    min-height: 0;*/
-            /*    min-width: 0;*/
-            /*}*/
-
-            /*score-component {*/
-            /*    min-height: 0;*/
-            /*    min-width: 0;*/
-            /*    height: 100%;*/
-            /*    width: 100%;*/
-            /*    overflow: hidden;*/
-            /*    display: block;*/
-
-            /*}*/
-
-        }
 
         .match-view{
             /*display:none;*/
@@ -58,10 +34,7 @@
 </head>
 <body>
 
-    <div class="match-view">
-        <timer-component id="timer" mode="edit"></timer-component>
-        <score-component id="score-component"></score-component>
-    </div>
+    <match-view id="match-view"></match-view>
     <div class="warning-view">
         <warning-component id="warning"></warning-component>
     </div>
