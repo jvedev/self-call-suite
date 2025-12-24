@@ -113,6 +113,7 @@ export class WarningComponent extends BaseComponent {
         this.warningDeduction.style.display = 'none';
         this.playerSelector.style.display = 'none';
         this.warningSelector.style.display = 'none';
+        this.summery.style.display = 'none';
         this.confirmButton.disabled = true;
         const player = this.playerSelector.player;
 
@@ -123,14 +124,15 @@ export class WarningComponent extends BaseComponent {
                 return;
             case 'warning':
                 this.warningSelector.style.display = 'block';
-                this.instructions = `Warning for <span class="${player}">${player}</span>`;
+                this.instructions = `Warning <span class="${player}">${player}</span>`;
                 return;
             case 'deduction':
-                this.instructions = `Deduction for <span class="${player}">${player}</span>`;
+                this.instructions = `Deduction <span class="${player}">${player}</span>`;
                 this.warningDeduction.style.display = 'block';
                 return;
             case 'summery':
                 this.instructions = "Warning Summary";
+                this.summery.style.display = 'block';
                 this.summery.player = this.playerSelector.player;
                 this.summery.warning = this.warningSelector.warning;
                 this.summery.penalty = this.warningDeduction.penalty;
@@ -155,6 +157,9 @@ export class WarningComponent extends BaseComponent {
         this.warningSelector.addEventListener('warning-selected', () => {
             this.warningDeduction.warning = this.warningSelector.warning
             this.stage = 'deduction';
+        });
+        this.warningDeduction.addEventListener('deduction-selected', () => {
+            this.stage = 'summery';
         });
     }
 

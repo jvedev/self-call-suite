@@ -148,9 +148,10 @@ export class TimerComponent extends HTMLElement {
 
 
     update() {
-        this.reflectState('paused')
         this.duration = this.minutes * 60 + this.seconds;
-        this.updateDisplay()
+        this.updateDisplay();
+        this.reflectState('running');
+        this.run()
     }
 
     private run() {
