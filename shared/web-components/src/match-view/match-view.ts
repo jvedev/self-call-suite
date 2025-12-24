@@ -18,9 +18,22 @@ export class MatchViewComponent extends BaseComponent {
         return this.queryRoot<WarningComponent>('warning-component');
     }
 
+    public get hitButton():HTMLButtonElement{
+        return this.queryRoot<HTMLButtonElement>('#hit');
+    }
+    public get warningButton():HTMLButtonElement{
+        return this.queryRoot<HTMLButtonElement>('#warning');
+    }
+    public get timeoutButton():HTMLButtonElement{
+        return this.queryRoot<HTMLButtonElement>('#timeout');
+    }
     constructor() {
         super()
         this.render(css, html)
+
+    }
+
+    connectedCallback(){
 
     }
 

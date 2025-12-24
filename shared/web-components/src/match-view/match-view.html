@@ -1,10 +1,25 @@
 <div class="placeholder">
     <div class="main-view">
         <timer-component id="timer" mode="edit"></timer-component>
-        <div class="player red">Jeroen</div>
-        <div class="player blue">Diego</div>
-        <div class="row">Warning: </div><div class="row warning text-red"></div>
-        <div>penalty: </div><div class="penalty text-red"></div>
+        <div class="players">
+            <div class="player red">
+                <div class="score">10</div>
+                <div class="name">Jeroen verzijl</div>
+            </div>
+            <div class="player blue">
+                <div class="score">3</div>
+                <div class="name">Diego de lion</div>
+            </div>
+        </div>
+        <button class="button green" id="hit">hit</button>
+        <button class="button red" id="warning">warning</button>
+        <button class="button orange" id="timeout">timeout</button>
+        <div class="bottom-buttons">
+            <button class="back button blue" id="back" >back</button>
+
+            <button class="button blue" id="extention">extention</button>
+            <button class="button red" id="stop">stop</button>
+        </div>
     </div>
 
 

@@ -1,6 +1,7 @@
 import '@shared/web-components';
 import {MatchViewComponent} from "@shared/web-components";
 
+
 const matchView = document.getElementById('match-view') as MatchViewComponent;
 const timer = matchView.timer!;
 const warning = matchView.warning!;

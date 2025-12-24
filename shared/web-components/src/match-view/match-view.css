@@ -11,33 +11,77 @@
         min-height: 0;
         min-width: 0;
 
-        .main-view{
-            display: grid;
-            grid-template-rows: 30vh 70vh;
-        }
-
-        timer-component {
-            display: block;
-            min-height: 0;
-            min-width: 0;
-        }
-
-        score-component {
-            min-height: 0;
-            min-width: 0;
+        .main-view {
             height: 100%;
-            width: 100%;
-            overflow: hidden;
-            display: block;
+            display: grid;
+            grid-template-rows: 23vh 1fr 5em 5em 5em 3em .5em;
+            grid-gap: .8em;
+
+            .players {
+                margin: .4rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 1rem;
+
+                .player {
+                    border: 1px solid black;
+                    border-radius: 0.5rem;
+                    display: grid;
+                    grid-template-rows: auto 4em;
+
+                    .score {
+                        text-align: center;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        font-size: clamp(1em, 17cqw, 5em);
+                    }
+
+                    .name {
+
+                        text-align: center;
+                        font-size: clamp(1em, 7cqw, 2em);
+
+                    }
+                }
+
+            }
         }
 
-        score-component{
-            display:none;
+        .button {
+            margin-left: .5rem;
+            margin-right: .5rem;
         }
-        warning-component {
-            display: none;
+        .bottom-buttons{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
         }
-
     }
+
+    /*timer-component {*/
+    /*    display: block;*/
+    /*    min-height: 0;*/
+    /*    min-width: 0;*/
+    /*}*/
+
+    /*score-component {*/
+    /*    min-height: 0;*/
+    /*    min-width: 0;*/
+    /*    height: 100%;*/
+    /*    width: 100%;*/
+    /*    overflow: hidden;*/
+    /*    display: block;*/
+    /*}*/
+
+    score-component {
+        display: none;
+    }
+
+    warning-component {
+        display: none;
+    }
+
 }
+
 
