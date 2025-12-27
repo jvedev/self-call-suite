@@ -1,6 +1,7 @@
 import html from "./warning-summery.html?raw"
 import css from "./warning-summery.css?raw"
 import {BaseComponent} from "../../base-component/base-component.ts";
+import {Player} from "@shared/types";
 
 type Warning = {
     description: string;
@@ -14,9 +15,9 @@ export default class WarningSummery extends BaseComponent {
     public set warning(warning: Warning) {
         this.queryRoot<HTMLDivElement>(".warning").innerHTML = warning.description;
     }
-    public set player(name: string) {
+    public set player(name: Player) {
         const playerDiv = this.queryRoot<HTMLDivElement>(".player")
-        playerDiv.innerHTML = name;
+        playerDiv.innerHTML = name || '';
         playerDiv.className = `player text-${name}`;
     }
 

@@ -6,6 +6,7 @@ import WarningSelector from "./warning-selector/warning-selector.ts";
 import WarningPlayer from "./warning-player/warning-player.ts";
 import WarningDeduction from "./warning-deduction/warning-deduction.ts";
 import WarningSummery from "./warning-summery/warning-summery.ts";
+import {Player, UntimedGameEvent} from "@shared/types";
 
 type WarningStage = 'player' | 'warning' | 'deduction' | 'summery';
 
@@ -20,11 +21,11 @@ export class WarningComponent extends BaseComponent {
         this.warningSelector.warning = warning;
     }
 
-    get player(): string | undefined {
+    get player(): Player | undefined {
         return this.playerSelector.player
     }
 
-    set player(player: string) {
+    set player(player: Player) {
         this.playerSelector.player = player;
     }
 
@@ -165,11 +166,13 @@ export class WarningComponent extends BaseComponent {
     confirm(){
 
         //dispatch a game-event with the warning details on window level
-        const detail = {
+        const detail:UntimedGameEvent = {
             type:'warning',
-            player: this.player,
-            warning: this.warning,
-            penalty: this.penalty
+            warning:{
+                player: this.player,
+                warning: this.warning.description,
+                penalty: this.penalty
+            }
         };
 
         //dispatch a custom event on window

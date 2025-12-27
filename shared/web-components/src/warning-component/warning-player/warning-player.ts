@@ -1,15 +1,16 @@
 import html from "./warning-player.html?raw"
 import css from "./warning-player.css?raw"
 import {BaseComponent} from "../../base-component/base-component.ts";
+import {Player} from "@shared/types";
 export class WarningPlayer extends BaseComponent {
 
-    private _player: string = '';
-    set player(player: string) {
+    private _player?: Player = undefined;
+    set player(player: Player) {
         this._player = player;
         this.dispatchEvent(new CustomEvent('player-selected', { detail: { player } }));
     }
 
-    get player(): string {
+    get player(): Player {
         return this._player;
     }
 

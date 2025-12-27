@@ -1,16 +1,22 @@
-import {Time} from "./time.ts";
+import {TimeTypes, timerState} from "./time.types..ts";
+import {Player} from "./pLayer.types.ts";
 
 export type  GameEvent = {
     type:'warning' | 'score' | 'time',
+    state:timerState
     warning?: WarningEvent,
-    ScoreEvent?: ScoreEvent,
-    time: Time,
+    score?: ScoreEvent,
+    time: TimeTypes,
 }
+
+
+
+export type  UntimedGameEvent = Omit<GameEvent, 'time'| 'state'>
 
 export type WarningEvent = {
     warning: string;
-    player: 'red' | 'blue';
-    penalty?: number;
+    player: Player;
+    penalty: number;
 }
 
 export type ScoreType = 'hit' | 'double' | 'blue-first' | 'red-first' | 'no-score' | 'unclear';

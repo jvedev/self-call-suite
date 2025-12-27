@@ -1,7 +1,7 @@
 import html from "./score-component.html?raw"
 import css from "./score-component.css?raw"
 import {BaseComponent} from "../base-component/base-component.ts";
-import {ScoreType} from "./score.types.ts";
+import {ScoreType, UntimedGameEvent} from "@shared/types";
 
 export type Player = 'red' | 'blue'
 
@@ -155,11 +155,14 @@ export class ScoreComponent extends BaseComponent {
             this.scoreRed = 0;
             this.scoreBlue = 0;
         }
-        const detail = {
+        const detail:UntimedGameEvent = {
             type: 'score',
-            scoreType: type,
-            scoreRed: this.scoreRed,
-            scoreBlue: this.scoreBlue,
+            score:{
+                scoreType: type,
+                scoreRed: this.scoreRed,
+                scoreBlue: this.scoreBlue,
+            }
+
         };
         //dispatch a custom event on window
         window.dispatchEvent(new CustomEvent('game-event', {detail}));

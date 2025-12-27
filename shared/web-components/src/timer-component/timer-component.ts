@@ -1,6 +1,6 @@
 import html from "./timer-component.html?raw"
 import css from "./timer-component.css?raw"
-import {Time} from "@shared/types";
+import {GameEvent, TimeTypes, timerState} from "@shared/types";
 import {BaseComponent} from "../base-component/base-component.ts";
 
 
@@ -13,12 +13,12 @@ export class TimerComponent extends BaseComponent {
     private startTime = 0;
     private intervalId: any = null;
 
-    set state(value: 'stopped' | 'running' | 'paused') {
+    set state(value: timerState) {
         this.setAttribute('state', value);
     }
 
-    get state(): 'stopped' | 'running' | 'paused' {
-        return this.getAttribute('state') as 'stopped' | 'running' | 'paused'
+    get state(): timerState {
+        return this.getAttribute('state') as timerState
     }
 
     public negative = -30;
@@ -89,7 +89,7 @@ export class TimerComponent extends BaseComponent {
         this.reflectState('stopped');
     }
 
-    public get passedTime(): Time {
+    public get passedTime(): TimeTypes {
         const passed = this.startTime - this.duration;
 
         const minutes = Math.floor(passed / 60);
@@ -176,6 +176,12 @@ export class TimerComponent extends BaseComponent {
     }
 
     private tick() {
+        const details: GameEvent = {
+            type: 'time',
+            time: this.passedTime,
+            state: this.state
+        }
+        this.dispatchCustomEvent("tick", {details});
         //no ticks when paused.
         if (this.state == 'paused') return;
 
