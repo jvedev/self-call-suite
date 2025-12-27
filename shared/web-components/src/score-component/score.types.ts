@@ -1,1 +1,1 @@
-export type ScoreType = 'hit' | 'double' | 'after-blow' | 'no-score' | 'unclear';
+export type ScoreType = 'hit' | 'double' | 'blue-first' | 'red-first' | 'no-score' | 'unclear';

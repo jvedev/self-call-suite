@@ -22,10 +22,14 @@ export class ScoreComponent extends BaseComponent {
         return this.queryRoot<HTMLButtonElement>('.hit');
     }
 
-    public get afterBlowButton(): HTMLButtonElement {
-        return this.queryRoot<HTMLButtonElement>('.after-blow');
+    public get redFirst(): HTMLButtonElement {
+        return this.queryRoot<HTMLButtonElement>('.score-types .red');
     }
 
+
+    public get blueFirst(): HTMLButtonElement {
+        return this.queryRoot<HTMLButtonElement>('.score-types .blue');
+    }
 
     public get doubleButton(): HTMLButtonElement {
         return this.queryRoot<HTMLButtonElement>('.double')!;
@@ -117,28 +121,29 @@ export class ScoreComponent extends BaseComponent {
         const hit = !double && (scoreRed > 0 || scoreBlue > 0)
         // set all buttons to disabled
         this.doubleButton.disabled = true;
-        this.afterBlowButton.disabled = true;
+        this.redFirst.disabled = true;
+        this.blueFirst.disabled = true;
         this.hitButton.disabled = true;
 
 
         // Enable/disable buttons based on scores
         if (double) {
             this.doubleButton.disabled = false;
-            this.afterBlowButton.disabled = false;
+            this.redFirst.disabled = false;
+            this.blueFirst.disabled = false;
             return;
         }
 
         if (hit) {
             this.hitButton.disabled = false;
         }
-
-
     }
 
     connectedCallback() {
         this.hitButton.addEventListener('click', () => this.score('hit'), this.eventCleanup)
         this.doubleButton.addEventListener('click', () => this.score('double'), this.eventCleanup)
-        this.afterBlowButton.addEventListener('click', () => this.score('after-blow'), this.eventCleanup)
+        this.redFirst.addEventListener('click', () => this.score('red-first'), this.eventCleanup)
+        this.blueFirst.addEventListener('click', () => this.score('blue-first'), this.eventCleanup)
         this.noScoreButton.addEventListener('click', () => this.score('no-score'), this.eventCleanup)
         this.unclearButton.addEventListener('click', () => this.score('unclear'), this.eventCleanup)
         this.backButton.addEventListener('click' ,()=>this.dispatchCustomEvent("back"), this.eventCleanup)
