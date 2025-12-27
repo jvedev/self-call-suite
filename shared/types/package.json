@@ -1,13 +1,10 @@
 {
-  "name": "@shared/web-components",
+  "name": "@shared/types",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": true,
   "scripts": {
     "build": "tsc --project tsconfig.json"
-  },
-  "dependencies": {
-    "@shared/types": "1.0.0"
   }
 }
