@@ -1,4 +1,4 @@
-import {BaseComponent} from "./base-component.ts";
+import {BaseComponent} from "./base-component/base-component.ts";
 
 export class ViewRoute extends HTMLElement {
     static get observedAttributes() {
@@ -15,7 +15,7 @@ export class ViewRoute extends HTMLElement {
 }
 
 export class AppRouter extends BaseComponent {
-    protected render(): void {
+    public render(): void {
         throw new Error("Method not implemented.");
     }
     protected attachEventListeners(): void {

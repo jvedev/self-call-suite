@@ -1,8 +1,10 @@
+import {Time} from "./time.ts";
+
 export type  GameEvent = {
-    type:'warning' | 'score',
+    type:'warning' | 'score' | 'time',
     warning?: WarningEvent,
     ScoreEvent?: ScoreEvent,
-    time: {minutes: number, seconds: number},
+    time: Time,
 }
 
 export type WarningEvent = {

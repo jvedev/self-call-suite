@@ -1,9 +1,12 @@
 import html from "./timer-component.html?raw"
 import css from "./timer-component.css?raw"
+import {Time} from "@shared/types";
+import {BaseComponent} from "../base-component/base-component.ts";
+
 
 type Modes = 'stop' | 'running' | 'pause' | 'edit' | 'ending';
 
-export class TimerComponent extends HTMLElement {
+export class TimerComponent extends BaseComponent {
     private minutes = 0;
     private seconds = 0;
     private duration = 0;
@@ -24,11 +27,10 @@ export class TimerComponent extends HTMLElement {
     private sign: string = '';
 
     private get placeholder(): HTMLDivElement {
-        return this.shadow.querySelector('.placeholder') as HTMLDivElement;
+        return this.queryRoot<HTMLDivElement>('.placeholder');
 
     }
 
-    private shadow: ShadowRoot;
 
     public modeStyles: Record<Modes, string> = {
         'stop': 'color:lightblue;',
@@ -50,14 +52,14 @@ export class TimerComponent extends HTMLElement {
 
     private applyModeStyle(mode: Modes) {
         if (this.modeStyles[mode]) {
-            this.shadow.querySelector(".placeholder")!.setAttribute("style", this.modeStyles[mode]);
+            this.placeholder.setAttribute("style", this.modeStyles[mode]);
         }
     }
 
     constructor() {
         super();
-        this.shadow = this.attachShadow({mode: 'open'});
-        this.render();
+
+        this.render(css, html);
         this.reflectState('stopped')
     }
 
@@ -66,34 +68,35 @@ export class TimerComponent extends HTMLElement {
         const bgColor = getComputedStyle(this).backgroundColor;
         const {placeholder} = this;
         placeholder.style.backgroundColor = bgColor;
-        placeholder.addEventListener('dblclick', () => {
-        });
-        this.shadow.querySelector('.start')!.addEventListener('click', this.start.bind(this));
-        this.shadow.querySelector('.pause')!.addEventListener('click', this.pause.bind(this));
-        this.shadow.querySelector('.resume')!.addEventListener('click', this.resume.bind(this));
-        this.shadow.querySelector('.edit')!.addEventListener('click', this.edit.bind(this));
-        this.shadow.querySelector('.update')!.addEventListener('click', this.update.bind(this));
+        this.queryRoot<HTMLDivElement>('.start').addEventListener('click', this.start.bind(this), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.pause').addEventListener('click', this.pause.bind(this), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.resume').addEventListener('click', this.resume.bind(this), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.edit').addEventListener('click', this.edit.bind(this), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.update').addEventListener('click', this.update.bind(this), this.eventCleanup);
 
         // Add click handlers for adjusters
-        this.shadow.querySelector('.adjust-minutes .increase')!
-            .addEventListener('click', () => this.adjustSeconds(60));
-        this.shadow.querySelector('.adjust-minutes .decrease')!
-            .addEventListener('click', () => this.adjustSeconds(-60));
-        this.shadow.querySelector('.adjust-seconds .increase')!
-            .addEventListener('click', () => this.adjustSeconds(1));
-        this.shadow.querySelector('.adjust-seconds .decrease')!
-            .addEventListener('click', () => this.adjustSeconds(-1));
+        this.queryRoot<HTMLDivElement>('.adjust-minutes .increase')!
+            .addEventListener('click', () => this.adjustSeconds(60), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.adjust-minutes .decrease')!
+            .addEventListener('click', () => this.adjustSeconds(-60), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.adjust-seconds .increase')!
+            .addEventListener('click', () => this.adjustSeconds(1), this.eventCleanup);
+        this.queryRoot<HTMLDivElement>('.adjust-seconds .decrease')!
+            .addEventListener('click', () => this.adjustSeconds(-1), this.eventCleanup);
         this.startTime = this.duration;
 
         this.updateDisplay();
         this.reflectState('stopped');
     }
 
-    public get passedTime(): string {
+    public get passedTime(): Time {
         const passed = this.startTime - this.duration;
-        const min = Math.floor(passed / 60).toString().padStart(2, '0');
-        const sec = (passed % 60).toString().padStart(2, '0');
-        return `${min}:${sec}`;
+
+        const minutes = Math.floor(passed / 60);
+        const min = minutes.toString().padStart(2, '0');
+        const seconds = (passed % 60)
+        const sec = seconds.toString().padStart(2, '0');
+        return {minutes, seconds, asString: `${min}:${sec}`};
     }
 
 
@@ -196,12 +199,8 @@ export class TimerComponent extends HTMLElement {
         }
         const min = this.sign + this.minutes.toString().padStart(2, '0');
         const sec = this.seconds.toString().padStart(2, '0');
-        this.shadow.querySelector('.minutes')!.textContent = min;
-        this.shadow.querySelector('.seconds')!.textContent = sec;
-    }
-
-    private render() {
-        this.shadow.innerHTML = `<style>${css}</style>${html}`
+        this.queryRoot<HTMLDivElement>('.minutes')!.textContent = min;
+        this.queryRoot<HTMLDivElement>('.seconds')!.textContent = sec;
     }
 
 
