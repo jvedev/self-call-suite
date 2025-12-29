@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "types": "index.d.ts",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "echo no build step for shared/views"
+  }
 }
-
