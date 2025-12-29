@@ -1,26 +1,15 @@
 import { defineConfig } from 'vite';
 import * as path from 'path';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
+  base: './', // Use relative paths for all assets
   resolve: {
     alias: {
       '@shared/web-components': path.resolve(__dirname, '../../shared/web-components/index.ts'),
     },
   },
   build: {
-    outDir: '../../docs/apps/tests',
+    outDir: 'dist', // Output to local dist directory
     emptyOutDir: true,
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        { src: 'manifest.json', dest: '.' },
-        { src: 'service-worker.js', dest: '.' },
-        { src: 'icon-192.png', dest: '.' },
-        { src: 'icon-512.png', dest: '.' }
-      ]
-    })
-  ]
 });
-

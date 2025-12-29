@@ -1,74 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Suite</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #181c24;
-      color: #f1f5fa;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    h1 {
-      margin-top: 2rem;
-      color: #e0e7ef;
-    }
-    .app-tiles {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin: 2rem 0;
-      justify-content: center;
-    }
-    .tile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      background: #232a36;
-      border-radius: 1.5rem;
-      box-shadow: 0 2px 12px #0006;
-      padding: 1.5rem 2rem;
-      transition: box-shadow 0.2s, transform 0.2s;
-      width: 180px;
-      cursor: pointer;
-    }
-    .tile:hover {
-      box-shadow: 0 4px 24px #000a;
-      transform: translateY(-4px) scale(1.03);
-    }
-    .tile img {
-      width: 96px;
-      height: 96px;
-      margin-bottom: 1rem;
-      border-radius: 1rem;
-      background: #232a36;
-      box-shadow: 0 1px 6px #0008;
-    }
-    .tile span {
-      color: #90caf9;
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-top: 0.5rem;
-      text-shadow: 0 1px 2px #000a;
-    }
-  </style>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Timer Component Test</title>
+    <link rel="manifest" href="./assets/manifest-BZnQ0P3L.json">
+    <meta name="theme-color" content="#1976d2">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #0f172a;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Media query for monitor screens */
+        @media (min-width: 1024px) {
+            match-view {
+                width: 30vw;
+                height: 100vh;
+            }
+        }
+
+
+
+        .match-view{
+            /*display:none;*/
+        }
+        .warning-view{
+            display:none;
+        }
+
+
+    </style>
+  <script type="module" crossorigin src="./assets/index-NYOCgvIu.js"></script>
 </head>
 <body>
-  <h1>App Suite</h1>
-  <div class="app-tiles">
-    <a class="tile" href="./apps/tests/" title="Open Tests App">
-      <img src="./apps/tests/icon-512.png" alt="Tests App icon">
-      <span>Tests App</span>
-    </a>
-  </div>
+
+    <match-view id="match-view"></match-view>
+    <div class="warning-view">
+        <warning-component id="warning"></warning-component>
+    </div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('service-worker.js');
+        });
+      }
+    </script>
 </body>
 </html>
