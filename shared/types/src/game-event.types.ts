@@ -21,8 +21,10 @@ export type WarningEvent = {
 
 export type ScoreType = 'hit' | 'double' | 'blue-first' | 'red-first' | 'no-score' | 'unclear';
 
+export type Score = number | 'low-quality';
+
 export type  ScoreEvent = {
-    scoreType: ScoreType,
-    scoreRed: number,
-    scoreBlue: number,
+    type: ScoreType,
+    scoreRed: Score,
+    scoreBlue: Score,
 };

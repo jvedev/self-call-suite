@@ -4,9 +4,15 @@ import {BaseComponent} from "../base-component/base-component.ts";
 import {TimerComponent} from "../timer-component/timer-component.ts";
 import {ScoreComponent} from "../score-component/score-component.ts";
 import {WarningComponent} from "../warning-component/warning-component.ts";
+import {CallOut} from "./call-out/call-out.ts";
+import {AppSettings} from "../../../modules/AppSettings.ts";
+import {ScoreEvent} from "@shared/types";
 
 export class MatchViewComponent extends BaseComponent {
 
+    public settings: Pick<AppSettings, 'calloutOnScore'> = {
+        calloutOnScore: true,
+    };
     public set playerRed(name: string) {
         const el = this.queryRoot<HTMLElement>('.player.red .name');
         el.textContent = name;
@@ -53,6 +59,10 @@ export class MatchViewComponent extends BaseComponent {
         return this.queryRoot<WarningComponent>('warning-component');
     }
 
+    public get callOut(): CallOut {
+        return this.queryRoot<CallOut>('call-out');
+    }
+
     public get hitButton(): HTMLButtonElement {
         return this.queryRoot<HTMLButtonElement>('#hit');
     }
@@ -84,37 +94,49 @@ export class MatchViewComponent extends BaseComponent {
         this.warningButton.addEventListener('click', this.showWarning.bind(this), this.eventCleanup)
         this.warning.addEventListener('back', this.showMain.bind(this), this.eventCleanup)
         this.score.addEventListener('back', this.showMain.bind(this), this.eventCleanup)
+        this.callOut.addEventListener('click', this.showMain.bind(this), this.eventCleanup)
         window.addEventListener('game-event', this.gameEvent.bind(this), this.eventCleanup)
     }
 
     gameEvent(event: Event) {
         const {detail} = event as CustomEvent;
         if (detail.type == 'score') {
-            this.scoreRed += detail.scoreRed;
-            this.scoreBlue += detail.scoreBlue;
+            const score = detail.score as ScoreEvent;
+            if(score.scoreRed!=='low-quality') {
+                this.scoreRed += score.scoreRed;
+            }
+            if(score.scoreBlue!=='low-quality') {
+                this.scoreBlue += score.scoreBlue;
+            }
+
+            if(this.settings.calloutOnScore){
+                this.callOut.score = score;
+                this.showCallOut()
+                return;
+            }
         }
 
         if (detail.type == 'warning') {
             const {player, penalty} = detail;
-            if(penalty) {
-                if(player == 'blue') {
+            if (penalty) {
+                if (player == 'blue') {
                     this.scoreBlue -= penalty;
                 }
-                if(player == 'red') {
+                if (player == 'red') {
                     this.scoreRed -= penalty;
                 }
             }
         }
-      this.showMain()
-
-        console.log('Game event', detail);
+        this.showMain()
     }
 
     hideAll() {
         this.main.style.display = 'none';
         this.warning.style.display = 'none';
         this.score.style.display = 'none';
+        this.callOut.style.display = 'none'
     }
+
     showMain() {
         this.hideAll()
         this.main.style.display = '';
@@ -124,6 +146,11 @@ export class MatchViewComponent extends BaseComponent {
         this.hideAll()
         this.warning.style.display = 'block';
 
+    }
+
+    showCallOut() {
+        this.hideAll()
+        this.callOut.style.display = 'block';
     }
 
     showScore() {

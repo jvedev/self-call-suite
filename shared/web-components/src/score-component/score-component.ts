@@ -1,20 +1,23 @@
 import html from "./score-component.html?raw"
 import css from "./score-component.css?raw"
 import {BaseComponent} from "../base-component/base-component.ts";
-import {ScoreType, UntimedGameEvent} from "@shared/types";
+import {Score, ScoreType, UntimedGameEvent} from "@shared/types";
+
 
 export type Player = 'red' | 'blue'
 
+
 export class ScoreComponent extends BaseComponent {
     private _scoreOptions: number[] = [];
-    private scoreRed: number = 0;
-    private scoreBlue: number = 0;
+    private scoreRed: Score = 0;
+    private scoreBlue: Score = 0;
+
 
     public get scoreButtonPlaceholder(): HTMLDivElement {
         return this.queryRoot<HTMLDivElement>('.score-buttons')!;
     }
 
-    public get backButton(){
+    public get backButton() {
         return this.queryRoot<HTMLButtonElement>('.back');
     }
 
@@ -58,16 +61,29 @@ export class ScoreComponent extends BaseComponent {
     }
 
     renderScoreButtons() {
+        this.renderNoQualityButton('red');
+        this.renderNoQualityButton('blue');
         this.scoreOptions.forEach((point: number) => {
             this.renderButton(point, 'red');
             this.renderButton(point, 'blue');
         })
     }
 
+    renderNoQualityButton(player: Player) {
+        const button = document.createElement('button');
+        button.className = `button ${player}`;
+        button.innerHTML = `Low quality`
+        button.setAttribute('data-points', 'low-quality');
+        button.addEventListener('click', () => {
+            this.scoreButtonSelected('low-quality', player);
+        });
+        this.scoreButtonPlaceholder.appendChild(button);
+    }
+
     renderButton(point: number, player: Player) {
         const button = document.createElement('button');
         button.className = `button ${player}`;
-        button.innerHTML = `${point}`;
+        button.innerHTML = point.toString();
         button.setAttribute('data-points', point.toString());
         button.addEventListener('click', () => {
             this.scoreButtonSelected(point, player);
@@ -84,16 +100,14 @@ export class ScoreComponent extends BaseComponent {
         });
     }
 
-    scoreButtonSelected(point: number, player: Player) {
+    scoreButtonSelected(point: Score, player: Player) {
         //check if the clicked button is selected already
         //if so set the
-
         this.deselectAllButtons()
         if (player === 'red') {
             this.scoreRed = (this.scoreRed === point) ? 0 : point;
-
-
         }
+
         if (player === 'blue') {
             this.scoreBlue = (this.scoreBlue === point) ? 0 : point;
 
@@ -117,8 +131,8 @@ export class ScoreComponent extends BaseComponent {
 
     setButtons() {
         const {scoreRed, scoreBlue} = this;
-        const double = (scoreRed > 0 && scoreBlue > 0)
-        const hit = !double && (scoreRed > 0 || scoreBlue > 0)
+        const double = (scoreRed !== 0 && scoreBlue !== 0)
+        const hit = !double && (scoreRed !== 0 || scoreBlue !== 0)
         // set all buttons to disabled
         this.doubleButton.disabled = true;
         this.redFirst.disabled = true;
@@ -146,7 +160,7 @@ export class ScoreComponent extends BaseComponent {
         this.blueFirst.addEventListener('click', () => this.score('blue-first'), this.eventCleanup)
         this.noScoreButton.addEventListener('click', () => this.score('no-score'), this.eventCleanup)
         this.unclearButton.addEventListener('click', () => this.score('unclear'), this.eventCleanup)
-        this.backButton.addEventListener('click' ,()=>this.dispatchCustomEvent("back"), this.eventCleanup)
+        this.backButton.addEventListener('click', () => this.dispatchCustomEvent("back"), this.eventCleanup)
     }
 
     score(type: ScoreType) {
@@ -155,12 +169,12 @@ export class ScoreComponent extends BaseComponent {
             this.scoreRed = 0;
             this.scoreBlue = 0;
         }
-        const detail:UntimedGameEvent = {
+        const detail: UntimedGameEvent = {
             type: 'score',
-            score:{
-                scoreType: type,
-                scoreRed: this.scoreRed,
-                scoreBlue: this.scoreBlue,
+            score: {
+                type: type,
+                scoreRed:  this.scoreRed,
+                scoreBlue: this.scoreBlue
             }
 
         };

@@ -74,6 +74,7 @@
     /*    display: block;*/
     /*}*/
 
+    call-out,
     score-component {
         height:100vh;
         display: none;

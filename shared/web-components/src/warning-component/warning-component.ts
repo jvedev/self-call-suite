@@ -99,10 +99,6 @@ export class WarningComponent extends BaseComponent {
         }
     }
 
-    public hide() {
-        this.stage = 'player'
-        this.style.display = 'none';
-    }
 
     public stageChanged() {
         this.warningDeduction.style.display = 'none';
@@ -159,7 +155,6 @@ export class WarningComponent extends BaseComponent {
                 this.confirm();
                 return
             }
-            this.stage = 'summery';
         });
     }
 

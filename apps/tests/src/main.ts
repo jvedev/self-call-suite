@@ -33,7 +33,7 @@ window.addEventListener('load', ()=>{
 
     timer.set(1, 23);
     timer.start()
-    score.scoreOptions = [2,3,4]
+    score.scoreOptions = [1,2,3,4]
 })
 window.addEventListener('game-event', (event: Event) => {
     const customEvent = event as CustomEvent;

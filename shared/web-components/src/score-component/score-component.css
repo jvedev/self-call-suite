@@ -23,12 +23,18 @@
         .score-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
             grid-gap: .4em;
+            align-items: stretch;
 
             button {
                 font-size: 1em;
+                &[data-points="-1"] {
+                    font-size: .8em;
+                }
                 filter: brightness(0.3); /* darken but preserve color */
+                height: 100%;
+                width: 100%;
                 &.selected {
                     filter: none;
                 }
@@ -37,7 +43,7 @@
         .score-types{
             display: grid;
             grid-template-columns: 1fr ;
-            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
             grid-gap: 1rem;
             .two-button-row{
                 display: grid;
