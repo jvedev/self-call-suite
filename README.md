@@ -66,7 +66,7 @@ This repository is organized as a monorepo. The main structure is:
     └── server
 ```
 
-See [`docs/repo_structure.md`](./docs/repo_structure.md) for more details.
+See [`docs/repo_structure.md`](documentation/repo_structure.md) for more details.
 
 ## Getting Started
 
@@ -78,6 +78,6 @@ See [`docs/repo_structure.md`](./docs/repo_structure.md) for more details.
 
 The following files in the `docs` directory provide detailed definitions:
 
-- [`match logic and settings`](./docs/logic_settings.md)
-- [`repo structure`](./docs/repo_structure.md)
-- [`views`](./docs/views.md)
+- [`match logic and settings`](documentation/logic_settings.md)
+- [`repo structure`](documentation/repo_structure.md)
+- [`views`](documentation/views.md)

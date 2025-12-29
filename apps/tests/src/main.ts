@@ -3,7 +3,6 @@ import {MatchViewComponent, TimerComponent} from "@shared/web-components";
 
 let timer:TimerComponent|null = null;
 window.addEventListener('load', ()=>{
-
     const matchView = document.getElementById('match-view') as MatchViewComponent;
     timer = matchView.timer!;
     const warning = matchView.warning!;
@@ -42,3 +41,12 @@ window.addEventListener('game-event', (event: Event) => {
     console.log('Game event', {...customEvent.detail, passedTime});
 
 });
+
+// Listen for service worker reload message
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.addEventListener('message', event => {
+    if (event.data && event.data.type === 'RELOAD_PAGE') {
+      window.location.reload();
+    }
+  });
+}

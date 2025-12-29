@@ -11,8 +11,11 @@
     "@shared/web-components": "1.0.0"
   },
   "devDependencies": {
+    "vite-plugin-static-copy": "^3.1.4",
     "typescript": "^5.0.0",
-    "vite": "7.1.11"
+    "vite": "^7.1.11"
+  },
+  "build": {
+    "outDir": "../../docs/apps/tests"
   }
 }
-
