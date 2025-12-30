@@ -6,7 +6,9 @@ import {ScoreComponent} from "../score-component/score-component.ts";
 import {WarningComponent} from "../warning-component/warning-component.ts";
 import {CallOut} from "./call-out/call-out.ts";
 import {AppSettings} from "../../../modules/AppSettings.ts";
-import {ScoreEvent} from "@shared/types";
+import {GameEventType, ScoreEvent} from "@shared/types";
+import {MatchHistoryComponent} from "../match-history/match-history.ts";
+import {SingleGameEvent} from "@shared/types/src/gameState.type.ts";
 
 export class MatchViewComponent extends BaseComponent {
 
@@ -16,6 +18,16 @@ export class MatchViewComponent extends BaseComponent {
     public set playerRed(name: string) {
         const el = this.queryRoot<HTMLElement>('.player.red .name');
         el.textContent = name;
+    }
+
+    public get playerRed(): string {
+        const el = this.queryRoot<HTMLElement>('.player.red .name');
+        return el.textContent;
+    }
+
+    public get playerBlue(): string {
+        const el = this.queryRoot<HTMLElement>('.player.blue .name');
+        return el.textContent;
     }
 
     public set playerBlue(name: string) {
@@ -59,6 +71,10 @@ export class MatchViewComponent extends BaseComponent {
         return this.queryRoot<WarningComponent>('warning-component');
     }
 
+    public get history(): MatchHistoryComponent {
+        return this.queryRoot<MatchHistoryComponent>('#match-history');
+    }
+
     public get callOut(): CallOut {
         return this.queryRoot<CallOut>('call-out');
     }
@@ -71,8 +87,8 @@ export class MatchViewComponent extends BaseComponent {
         return this.queryRoot<HTMLButtonElement>('#warning');
     }
 
-    public get timeoutButton(): HTMLButtonElement {
-        return this.queryRoot<HTMLButtonElement>('#timeout');
+    public get historyButton(): HTMLButtonElement {
+        return this.queryRoot<HTMLButtonElement>('#history');
     }
 
     public get extentButton(): HTMLButtonElement {
@@ -89,7 +105,8 @@ export class MatchViewComponent extends BaseComponent {
     }
 
     connectedCallback() {
-        this.timeoutButton.addEventListener('click', this.pause.bind(this), this.eventCleanup)
+        this.timer.addEventListener("tick", () => this.updateGameState('time'), this.eventCleanup);
+        this.historyButton.addEventListener('click', this.showHistory.bind(this), this.eventCleanup)
         this.hitButton.addEventListener('click', this.showScore.bind(this), this.eventCleanup)
         this.warningButton.addEventListener('click', this.showWarning.bind(this), this.eventCleanup)
         this.warning.addEventListener('back', this.showMain.bind(this), this.eventCleanup)
@@ -112,6 +129,7 @@ export class MatchViewComponent extends BaseComponent {
             if(this.settings.calloutOnScore){
                 this.callOut.score = score;
                 this.showCallOut()
+                this.updateGameState(detail.type)
                 return;
             }
         }
@@ -127,6 +145,7 @@ export class MatchViewComponent extends BaseComponent {
                 }
             }
         }
+        this.updateGameState(detail.type)
         this.showMain()
     }
 
@@ -134,7 +153,8 @@ export class MatchViewComponent extends BaseComponent {
         this.main.style.display = 'none';
         this.warning.style.display = 'none';
         this.score.style.display = 'none';
-        this.callOut.style.display = 'none'
+        this.callOut.style.display = 'none';
+        this.history.style.display = 'none';
     }
 
     showMain() {
@@ -158,19 +178,22 @@ export class MatchViewComponent extends BaseComponent {
         this.score.style.display = 'block';
     }
 
-    pause() {
-        //check if the timer is allready paused
-        if (this.timer.mode == 'pause') {
-            this.timer.resume()
-            this.timeoutButton.innerText = 'Timeout'
-            return;
-        }
-        this.timer.pause()
-        this.timeoutButton.innerText = 'Resume'
-
+    showHistory() {
+        this.hideAll()
+        this.history.style.display = 'block';
     }
 
 
+
+    updateGameState(type:GameEventType):void{
+        const {scoreRed, scoreBlue, playerRed, playerBlue} = this;
+        const {state, passedTime} = this.timer;
+        const detail:SingleGameEvent= {
+            scoreRed, scoreBlue, playerRed, playerBlue,state, passedTime,type
+        }
+        window.dispatchEvent(new CustomEvent('state-change', {detail}));
+
+    }
 }
 
 customElements.define('match-view', MatchViewComponent);

@@ -29,17 +29,17 @@ window.addEventListener('load', ()=>{
         {description: 'Being a Dick', minPenalty: 1, maxPenalty: 9},
     ]
 
-
-    timer.set(1, 23);
+if(timer){
+    timer.set(3, 0);
     timer.start()
-    score.scoreOptions = [1,2,3,4]
-})
-window.addEventListener('game-event', (event: Event) => {
-    const customEvent = event as CustomEvent;
-    if(!timer) return;
-    const{passedTime} = timer
-    console.log('Game event', {...customEvent.detail, passedTime});
+}
 
+    score.scoreOptions = [2,3]
+})
+window.addEventListener('state-change', (event: Event) => {
+    const customEvent = event as CustomEvent;
+    if(customEvent.detail.type !="time")
+    console.log('state-change', customEvent.detail);
 });
 
 // Listen for service worker reload message

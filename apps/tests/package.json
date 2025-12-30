@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:out": "set BUILD_OUTDIR=%1 && vite build"
   },
   "dependencies": {
     "@shared/web-components": "1.0.0"

@@ -195,7 +195,7 @@ export class TimerComponent extends BaseComponent {
         this.duration--;
 
         this.updateDisplay();
-
+        this.dispatchCustomEvent("tick", {details});
     }
 
     private updateDisplay() {

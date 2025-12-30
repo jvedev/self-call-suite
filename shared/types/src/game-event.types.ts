@@ -1,8 +1,10 @@
 import {TimeTypes, timerState} from "./time.types..ts";
 import {Player} from "./pLayer.types.ts";
 
+export type GameEventType = 'warning' | 'score' | 'time'
+
 export type  GameEvent = {
-    type:'warning' | 'score' | 'time',
+    type:GameEventType,
     state:timerState
     warning?: WarningEvent,
     score?: ScoreEvent,

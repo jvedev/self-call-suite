@@ -8,15 +8,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=apps/self-call",
-    "dev:self-call": "npm run dev --workspace=apps/self-call",
-    "dev:scoreboard": "npm run dev --workspace=apps/scoreboard",
-    "dev:scorekeeper": "npm run dev --workspace=apps/scoreKeeper",
-    "dev:admin": "npm run dev --workspace=apps/admin",
-    "dev:server": "npm run dev --workspace=apps/server",
-    "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces",
-    "install:all": "npm install --workspaces"
+    "build:tests": "cd apps/tests && npm run build && cd ../.."
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",

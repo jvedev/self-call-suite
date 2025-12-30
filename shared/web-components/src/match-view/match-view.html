@@ -3,17 +3,17 @@
         <timer-component id="timer" mode="edit"></timer-component>
         <div class="players">
             <div class="player red">
-                <div class="score">10</div>
-                <div class="name">Jeroen verzijl</div>
+                <div class="score">0</div>
+                <div class="name"></div>
             </div>
             <div class="player blue">
-                <div class="score">3</div>
-                <div class="name">Diego de lion</div>
+                <div class="score">0</div>
+                <div class="name"></div>
             </div>
         </div>
         <button class="button green" id="hit">hit</button>
         <button class="button red" id="warning">warning</button>
-        <button class="button orange" id="timeout">Timeout</button>
+        <button class="button orange" id="history">Match history</button>
         <div class="bottom-buttons">
             <button class="back button blue" id="back" >Back</button>
 
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-
+    <match-history id="match-history"></match-history>
     <score-component id="score-component"></score-component>
     <warning-component id="warning"></warning-component>
     <call-out id="call-out"></call-out>
