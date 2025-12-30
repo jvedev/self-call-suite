@@ -6,9 +6,9 @@ import {ScoreComponent} from "../score-component/score-component.ts";
 import {WarningComponent} from "../warning-component/warning-component.ts";
 import {CallOut} from "./call-out/call-out.ts";
 import {AppSettings} from "../../../modules/AppSettings.ts";
-import {GameEventType, ScoreEvent} from "@shared/types";
+import {AllEvents,  ScoreEvent} from "@shared/types";
 import {MatchHistoryComponent} from "../match-history/match-history.ts";
-import {SingleGameEvent} from "@shared/types/src/gameState.type.ts";
+import {SingleGameEvent} from "@shared/types";
 
 export class MatchViewComponent extends BaseComponent {
 
@@ -75,6 +75,8 @@ export class MatchViewComponent extends BaseComponent {
         return this.queryRoot<MatchHistoryComponent>('#match-history');
     }
 
+
+
     public get callOut(): CallOut {
         return this.queryRoot<CallOut>('call-out');
     }
@@ -129,7 +131,7 @@ export class MatchViewComponent extends BaseComponent {
             if(this.settings.calloutOnScore){
                 this.callOut.score = score;
                 this.showCallOut()
-                this.updateGameState(detail.type)
+                this.updateGameState(detail)
                 return;
             }
         }
@@ -145,7 +147,7 @@ export class MatchViewComponent extends BaseComponent {
                 }
             }
         }
-        this.updateGameState(detail.type)
+        this.updateGameState(detail)
         this.showMain()
     }
 
@@ -185,11 +187,19 @@ export class MatchViewComponent extends BaseComponent {
 
 
 
-    updateGameState(type:GameEventType):void{
+    updateGameState(gameEvent:AllEvents):void{
+
+
         const {scoreRed, scoreBlue, playerRed, playerBlue} = this;
         const {state, passedTime} = this.timer;
         const detail:SingleGameEvent= {
-            scoreRed, scoreBlue, playerRed, playerBlue,state, passedTime,type
+            scoreRed,
+            scoreBlue,
+            playerRed,
+            playerBlue,
+            state,
+            passedTime,
+            lastEvent:gameEvent
         }
         window.dispatchEvent(new CustomEvent('state-change', {detail}));
 

@@ -1,4 +1,3 @@
-
 :host {
     display: block;
     box-sizing: border-box;
@@ -12,8 +11,38 @@
         min-height: 0;
         min-width: 0;
 
+        h1 {
+            text-align: center;
+            padding: .2em;
+        }
+
+        .history-container {
+            display: grid;
+            grid-template-rows: 1fr;
+            row-gap: .5em;
+            font-size: 1.2em;
+            span{
+                padding: 0 .2em 0 .2em;
+            }
+            .score {
+                display: grid;
+                grid-template-columns: 3em auto 10em 10em;
+            }
+            .warning {
+                display: grid;
+                /*grid-template-rows: 1fr 1fr;*/
+                grid-template-columns: 3em auto 10em;
+
+                /*.penalty{*/
+                /*    grid-column: 3 / 3;*/
+                /*    grid-row:2;*/
+                /*}*/
+                /*.description {*/
+                /*     grid-column: 2 / 3;*/
+                /*}*/
+            }
+
+        }
     }
 
 }
-
-

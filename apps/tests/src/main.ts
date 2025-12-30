@@ -1,5 +1,6 @@
 import '@shared/web-components';
 import {MatchViewComponent, TimerComponent} from "@shared/web-components";
+import {isTimeEvent} from "@shared/types";
 
 let timer:TimerComponent|null = null;
 window.addEventListener('load', ()=>{
@@ -35,10 +36,116 @@ if(timer){
 }
 
     score.scoreOptions = [2,3]
+
+    matchView.history.history = [
+        {
+            "scoreRed": 2,
+            "scoreBlue": 2,
+            "playerRed": "Jeroen",
+            "playerBlue": "Diego",
+            "state": "running",
+            "passedTime": {
+                "minutes": 0,
+                "seconds": 14,
+                "asString": "00:14"
+            },
+            "lastEvent": {
+                "type": "score",
+                "score": {
+                    "type": "double",
+                    "scoreRed": 2,
+                    "scoreBlue": 2
+                }
+            }
+        },
+        {
+            "scoreRed": 5,
+            "scoreBlue": 2,
+            "playerRed": "Jeroen",
+            "playerBlue": "Diego",
+            "state": "running",
+            "passedTime": {
+                "minutes": 0,
+                "seconds": 22,
+                "asString": "00:22"
+            },
+            "lastEvent": {
+                "type": "score",
+                "score": {
+                    "type": "blue-first",
+                    "scoreRed": 3,
+                    "scoreBlue": "low-quality"
+                }
+            }
+        },
+        {
+            "scoreRed": 5,
+            "scoreBlue": 4,
+            "playerRed": "Jeroen",
+            "playerBlue": "Diego",
+            "state": "running",
+            "passedTime": {
+                "minutes": 0,
+                "seconds": 48,
+                "asString": "00:48"
+            },
+            "lastEvent": {
+                "type": "score",
+                "score": {
+                    "type": "double",
+                    "scoreRed": "low-quality",
+                    "scoreBlue": 2
+                }
+            }
+        },
+        {
+            "scoreRed": 5,
+            "scoreBlue": 4,
+            "playerRed": "Jeroen",
+            "playerBlue": "Diego",
+            "state": "running",
+            "passedTime": {
+                "minutes": 0,
+                "seconds": 54,
+                "asString": "00:54"
+            },
+            "lastEvent": {
+                "type": "warning",
+                "warning": {
+                    "player": "blue",
+                    "warning": "Illegal target",
+                    "penalty": 2
+                }
+            }
+        },
+        {
+            "scoreRed": 5,
+            "scoreBlue": 4,
+            "playerRed": "Jeroen",
+            "playerBlue": "Diego",
+            "state": "running",
+            "passedTime": {
+                "minutes": 1,
+                "seconds": 1,
+                "asString": "01:01"
+            },
+            "lastEvent": {
+                "type": "warning",
+                "warning": {
+                    "player": "red",
+                    "warning": "Influencing jurors",
+                    "penalty": 0
+                }
+            }
+        }
+    ]
+
+     matchView.showHistory()
+     matchView.history.updateHistory();
 })
 window.addEventListener('state-change', (event: Event) => {
     const customEvent = event as CustomEvent;
-    if(customEvent.detail.type !="time")
+    if(!isTimeEvent(customEvent.detail.lastEvent))
     console.log('state-change', customEvent.detail);
 });
 
