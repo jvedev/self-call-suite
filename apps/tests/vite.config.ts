@@ -2,8 +2,6 @@ import { defineConfig } from 'vite';
 import * as path from 'path';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-const outDir = process.env.BUILD_OUTDIR || '../../docs/apps/tests';
-
 export default defineConfig({
   resolve: {
     alias: {
@@ -11,7 +9,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir,
+    outDir: 'dist', // Set to Vite's default output directory
     emptyOutDir: true,
   },
   plugins: [
