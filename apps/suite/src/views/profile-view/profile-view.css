@@ -1,0 +1,155 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #f9fafb;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.profile-header-bar {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+
+  h1 {
+    margin: 0;
+    color: var(--color-primary);
+  }
+
+  .back-btn {
+    color: var(--color-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+}
+
+.profile-main {
+  flex: 1;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+}
+
+.profile-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+
+  h2 {
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--color-primary);
+  }
+
+  .alias {
+    margin: 0;
+    color: var(--color-secondary);
+    font-size: var(--font-size-lg);
+  }
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.info-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+
+  h3 {
+    margin: 0 0 var(--spacing-md) 0;
+    color: #111827;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--spacing-sm);
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid #e5e7eb;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    label {
+      font-weight: 500;
+      color: var(--color-secondary);
+    }
+
+    span {
+      color: #111827;
+    }
+  }
+
+  .roles-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .role-badge {
+    display: inline-block;
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+}
+
+.profile-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+  align-items: center;
+
+  .edit-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    color: white;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .back-link {
+    color: var(--color-primary);
+    transition: var(--transition);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+

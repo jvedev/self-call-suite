@@ -1,0 +1,235 @@
+/* Shared styles for Suite components */
+
+:host {
+  --color-super-admin: #dc2626;
+  --color-app-admin: #ea580c;
+  --color-club-admin: #f59e0b;
+  --color-event-director: #3b82f6;
+  --color-table-official: #06b6d4;
+  --color-participant: #10b981;
+
+  --color-primary: #3b82f6;
+  --color-secondary: #6b7280;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+
+  --transition: all 0.2s ease;
+}
+
+:host {
+  font-family: var(--font-family);
+  color: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  font-family: inherit;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: var(--font-size-md);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+button.primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+button.secondary {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+button.danger {
+  background-color: var(--color-error);
+  color: white;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  padding: var(--spacing-sm);
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.flex {
+  display: flex;
+  gap: var(--spacing-md);
+
+  &.row {
+    flex-direction: row;
+  }
+
+  &.col {
+    flex-direction: column;
+  }
+
+  &.center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: var(--spacing-md);
+
+  &.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+
+  &.role {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
+  &.success {
+    background-color: var(--color-success);
+    color: white;
+  }
+
+  &.error {
+    background-color: var(--color-error);
+    color: white;
+  }
+
+  &.warning {
+    background-color: var(--color-warning);
+    color: white;
+  }
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.text-md {
+  font-size: var(--font-size-md);
+}
+
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+
+.hidden {
+  display: none !important;
+}
+

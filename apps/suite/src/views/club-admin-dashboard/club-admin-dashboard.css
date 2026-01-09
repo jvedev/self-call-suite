@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #f9fafb;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.admin-header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+
+  h1 {
+    margin: 0;
+    color: var(--color-club-admin);
+  }
+
+  .back-btn {
+    color: var(--color-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+
+    &:hover {
+      background-color: #f3f4f6;
+    }
+  }
+}
+
+.admin-main {
+  flex: 1;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+  }
+
+  .section-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    border: 1px solid #e5e7eb;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    h3 {
+      margin: 0 0 var(--spacing-sm) 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--color-secondary);
+    }
+  }
+}
+

@@ -96,3 +96,16 @@ Hierop is te zien:
 
 * Vechters worden aangemaakt met naam of alias.
 * Vechters krijgen een Ranking (een subjectieve waarde voor het indelen van niveaus).
+
+
+
+
+# 🛠️ Technische Specificaties
+
+# score keeper
+Laad de regelset van het toernooi
+Wordt toegewezen aan een specifieke arena
+Laad een losse match met vechters of pool met vechters
+communiseerd met de backend de volgende informatie 
+
+
